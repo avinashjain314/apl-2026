@@ -1310,12 +1310,12 @@ function copyWhatsAppReport() {
 // ==========================================
 
 const SPIRITUAL_TITLES = [
-  { min: 0, max: 50, titleHi: "श्रावक/श्राविका", titleEn: "Shravak/Shravika" },
-  { min: 50, max: 150, titleHi: "आराधक", titleEn: "Aradhak" },
-  { min: 150, max: 300, titleHi: "साधक", titleEn: "Sadhak" },
-  { min: 300, max: 500, titleHi: "धर्म वीर", titleEn: "Dharma Veer" },
-  { min: 500, max: 800, titleHi: "तपस्वी", titleEn: "Tapasvi" },
-  { min: 800, max: Infinity, titleHi: "परम आराधक", titleEn: "Param Aradhak" }
+  { min: 0, max: 100, titleHi: "श्रावक/श्राविका", titleEn: "Shravak/Shravika" },
+  { min: 100, max: 300, titleHi: "आराधक", titleEn: "Aradhak" },
+  { min: 300, max: 600, titleHi: "साधक", titleEn: "Sadhak" },
+  { min: 600, max: 1000, titleHi: "धर्म वीर", titleEn: "Dharma Veer" },
+  { min: 1000, max: 1500, titleHi: "तपस्वी", titleEn: "Tapasvi" },
+  { min: 1500, max: Infinity, titleHi: "परम आराधक", titleEn: "Param Aradhak" }
 ];
 
 function updateSpiritualTitle(score) {

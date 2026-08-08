@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>आराधना प्रीमियर लीग - 2026</title>
-  <link rel="stylesheet" href="style.css?v=2.0.3">
+  <link rel="stylesheet" href="style.css?v=2.0.4">
 </head>
 <body>
 
@@ -111,6 +111,22 @@
         <div class="score-badge-circle">
           <span class="score-value" id="runs-display-val">0</span>
           <span class="score-unit" id="t-runsUnit">रन</span>
+        </div>
+      </div>
+
+      <!-- Jain Title & Gamification Progress Bar -->
+      <div class="title-progress-card" style="background: var(--bg-card); border-radius: 16px; padding: 12px 16px; margin-top: -12px; margin-bottom: 20px; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border); text-align: left;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 13px; color: var(--color-text-muted); font-weight: 500;" id="t-currentTitleLabel">आपकी आध्यात्मिक पदवी:</span>
+          <span id="user-spiritual-title" class="badge-role" style="background: linear-gradient(135deg, var(--color-saffron), var(--color-gold)); color: #fff; font-weight: bold; padding: 4px 12px; border-radius: 20px; font-size: 12px; text-shadow: 0 1px 2px rgba(0,0,0,0.15);">श्रावक</span>
+        </div>
+        <!-- Progress Bar -->
+        <div style="background: var(--color-saffron-light); height: 8px; border-radius: 4px; overflow: hidden; margin: 8px 0 4px 0;">
+          <div id="title-progress-bar" style="background: linear-gradient(90deg, var(--color-saffron), var(--color-gold)); width: 0%; height: 100%; transition: width 0.5s ease-in-out;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--color-text-muted);">
+          <span id="title-progress-text">अगली पदवी के लिए 50 रनों की आवश्यकता है</span>
+          <span id="next-spiritual-title" style="font-weight: 600; color: var(--color-maroon);">आराधक (50)</span>
         </div>
       </div>
       
@@ -430,6 +446,6 @@
   </div>
 
   <!-- Load script at bottom -->
-  <script src="app.js?v=2.0.3"></script>
+  <script src="app.js?v=2.0.4"></script>
 </body>
 </html>

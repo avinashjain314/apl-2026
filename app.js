@@ -116,7 +116,8 @@ const TRANSLATIONS = {
     backToLogin: "वापस लॉगिन पर जाएं",
     invalidMobile: "कृपया वैध 10-अंकीय मोबाइल नंबर दर्ज करें।",
     reportCardBtn: "🏆 रिपोर्ट कार्ड डाउनलोड / शेयर",
-    reportTitle: "आराधना रिपोर्ट कार्ड"
+    reportTitle: "आराधना रिपोर्ट कार्ड",
+    currentTitleLabel: "आपकी आध्यात्मिक पदवी:"
   },
   en: {
     appTitle: "Aradhana Premier League - 2026",
@@ -159,7 +160,8 @@ const TRANSLATIONS = {
     backToLogin: "Go back to Login",
     invalidMobile: "Please enter a valid 10-digit mobile number.",
     reportCardBtn: "🏆 Download / Share Report Card",
-    reportTitle: "Aradhana Report Card"
+    reportTitle: "Aradhana Report Card",
+    currentTitleLabel: "Your Spiritual Title:"
   }
 };
 
@@ -364,7 +366,7 @@ function updateLanguageUI() {
     "loginTitle", "loginSub", "mobileLabel", "nameLabel", "teamLabel", 
     "roleLabel", "ageLabel", "fhLabel", "loginBtn", "registerBtn",
     "registerTitle", "registerSub", "totalRuns", "runsUnit", "selectDate",
-    "runs1", "runs4", "runs6", "runsOnetime", "rulesRef", "starDesc", "backToLogin"
+    "runs1", "runs4", "runs6", "runsOnetime", "rulesRef", "starDesc", "backToLogin", "currentTitleLabel"
   ];
   
   tKeys.forEach(key => {
@@ -412,6 +414,9 @@ function updateScoreUI() {
   } else {
     bonusEl.style.display = "none";
   }
+  
+  // Update Spiritual Title & progress bar
+  updateSpiritualTitle(score);
 }
 
 function renderCalendar() {
@@ -1298,4 +1303,58 @@ function copyWhatsAppReport() {
     preview.innerText = text;
     alert(state.currentLanguage === "hi" ? "कॉपी करना विफल रहा। कृपया बॉक्स में दिए गए टेक्स्ट को मैन्युअल रूप से सिलेक्ट करके कॉपी करें।" : "Copy failed. Please manually copy the text in the preview box.");
   });
+}
+
+// ==========================================
+// SPIRITUAL TITLE GAMIFICATION SYSTEM
+// ==========================================
+
+const SPIRITUAL_TITLES = [
+  { min: 0, max: 50, titleHi: "श्रावक/श्राविका", titleEn: "Shravak/Shravika" },
+  { min: 50, max: 150, titleHi: "आराधक", titleEn: "Aradhak" },
+  { min: 150, max: 300, titleHi: "साधक", titleEn: "Sadhak" },
+  { min: 300, max: 500, titleHi: "धर्म वीर", titleEn: "Dharma Veer" },
+  { min: 500, max: 800, titleHi: "तपस्वी", titleEn: "Tapasvi" },
+  { min: 800, max: Infinity, titleHi: "परम आराधक", titleEn: "Param Aradhak" }
+];
+
+function updateSpiritualTitle(score) {
+  const isHi = state.currentLanguage === "hi";
+  let currentTier = SPIRITUAL_TITLES[0];
+  let nextTier = null;
+  
+  for (let i = 0; i < SPIRITUAL_TITLES.length; i++) {
+    if (score >= SPIRITUAL_TITLES[i].min) {
+      currentTier = SPIRITUAL_TITLES[i];
+      nextTier = SPIRITUAL_TITLES[i + 1] || null;
+    }
+  }
+  
+  const currentTitleStr = isHi ? currentTier.titleHi : currentTier.titleEn;
+  document.getElementById("user-spiritual-title").innerText = currentTitleStr;
+  
+  const progressBar = document.getElementById("title-progress-bar");
+  const progressText = document.getElementById("title-progress-text");
+  const nextTitleEl = document.getElementById("next-spiritual-title");
+  
+  if (nextTier) {
+    const nextTitleStr = isHi ? nextTier.titleHi : nextTier.titleEn;
+    const needed = nextTier.min - score;
+    const range = nextTier.min - currentTier.min;
+    const currentProgress = score - currentTier.min;
+    const pct = Math.min(100, Math.max(0, (currentProgress / range) * 100));
+    
+    progressBar.style.width = pct + "%";
+    nextTitleEl.innerText = `${nextTitleStr} (${nextTier.min})`;
+    
+    progressText.innerText = isHi 
+      ? `अगली पदवी के लिए ${needed} और रनों की आवश्यकता है` 
+      : `${needed} more runs to become ${nextTitleStr}`;
+  } else {
+    progressBar.style.width = "100%";
+    nextTitleEl.innerText = isHi ? "शिखर पर!" : "At the Top!";
+    progressText.innerText = isHi 
+      ? "बधाई हो! आप उच्चतम आध्यात्मिक पदवी पर हैं।" 
+      : "Congratulations! You have reached the highest title.";
+  }
 }

@@ -117,7 +117,9 @@ const TRANSLATIONS = {
     invalidMobile: "कृपया वैध 10-अंकीय मोबाइल नंबर दर्ज करें।",
     reportCardBtn: "🏆 रिपोर्ट कार्ड डाउनलोड / शेयर",
     reportTitle: "आराधना रिपोर्ट कार्ड",
-    currentTitleLabel: "आपकी आध्यात्मिक पदवी:"
+    currentTitleLabel: "आपकी आध्यात्मिक पदवी:",
+    tabMilestones: "आध्यात्मिक पदवी (Tiers)",
+    milestoneHeader: "आध्यात्मिक पदवी माइलस्टोन (Spiritual Title Milestones):"
   },
   en: {
     appTitle: "Aradhana Premier League - 2026",
@@ -161,7 +163,9 @@ const TRANSLATIONS = {
     invalidMobile: "Please enter a valid 10-digit mobile number.",
     reportCardBtn: "🏆 Download / Share Report Card",
     reportTitle: "Aradhana Report Card",
-    currentTitleLabel: "Your Spiritual Title:"
+    currentTitleLabel: "Your Spiritual Title:",
+    tabMilestones: "Spiritual Tiers (Tiers)",
+    milestoneHeader: "Spiritual Title Milestones:"
   }
 };
 
@@ -366,7 +370,7 @@ function updateLanguageUI() {
     "loginTitle", "loginSub", "mobileLabel", "nameLabel", "teamLabel", 
     "roleLabel", "ageLabel", "fhLabel", "loginBtn", "registerBtn",
     "registerTitle", "registerSub", "totalRuns", "runsUnit", "selectDate",
-    "runs1", "runs4", "runs6", "runsOnetime", "rulesRef", "starDesc", "backToLogin", "currentTitleLabel"
+    "runs1", "runs4", "runs6", "runsOnetime", "rulesRef", "starDesc", "backToLogin", "currentTitleLabel", "tabMilestones", "milestoneHeader"
   ];
   
   tKeys.forEach(key => {

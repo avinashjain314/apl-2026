@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>आराधना प्रीमियर लीग - 2026</title>
+  <link rel="stylesheet" href="style.css?v=2.0.2">
+</head>
+<body>
+
+  <!-- Sticky Top Bar -->
+  <header class="top-bar">
+    <div class="logo-container">
+      <div class="logo-icon">A</div>
+      <div class="logo-text" id="app-title">आराधना प्रीमियर लीग - 2026</div>
+    </div>
+    <div class="controls-container">
+      <button class="lang-btn" id="lang-btn">
+        <span id="lang-btn-text">English</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- SCREEN 1: LOGIN -->
+    <section id="screen-login" class="auth-wrapper" style="display: block;">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1 id="t-loginTitle">APL 2026 लॉगिन</h1>
+          <p id="t-loginSub">अपनी प्रगति को सुरक्षित रखने के लिए मोबाइल नंबर से लॉगिन करें</p>
+        </div>
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-mobile" id="t-mobileLabel">मोबाइल नंबर</label>
+            <input type="tel" id="login-mobile" class="form-control" placeholder="10-अंकीय मोबाइल नंबर दर्ज करें" maxlength="10" required>
+          </div>
+          <div id="login-error" style="color: var(--color-maroon); font-size: 13.5px; font-weight: 600; margin-bottom: 12px; text-align: left;"></div>
+          <button type="submit" class="btn-primary" id="login-btn-submit">
+            <span id="t-loginBtn">आगे बढ़ें</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: REGISTRATION -->
+    <section id="screen-registration" class="auth-wrapper" style="display: none;">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1 id="t-registerTitle">पंजीकरण</h1>
+          <p id="t-registerSub">आराधना प्रीमियर लीग में भाग लेने के लिए विवरण भरें</p>
+        </div>
+        <form id="registration-form">
+          <div class="form-group">
+            <label for="reg-mobile" id="t-mobileLabel">मोबाइल नंबर</label>
+            <input type="tel" id="reg-mobile" class="form-control" disabled>
+          </div>
+          <div class="form-group">
+            <label for="reg-name" id="t-nameLabel">आपका नाम</label>
+            <input type="text" id="reg-name" class="form-control" placeholder="अपना नाम दर्ज करें" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-team" id="t-teamLabel">टीम का नाम</label>
+            <input type="text" id="reg-team" class="form-control" placeholder="अपनी टीम का नाम दर्ज करें" required>
+          </div>
+          <div class="form-group">
+            <label id="t-roleLabel">आपकी भूमिका</label>
+            <div class="role-selector">
+              <div class="role-option selected" data-role="Member" id="role-member">टीम सदस्य</div>
+              <div class="role-option" data-role="Captain" id="role-captain">कैप्टन</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="reg-age" id="t-ageLabel">आयु</label>
+            <input type="number" id="reg-age" class="form-control" placeholder="आयु दर्ज करें" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-fh" id="t-fhLabel">पिता/पति का नाम</label>
+            <input type="text" id="reg-fh" class="form-control" placeholder="पिता या पति का नाम दर्ज करें" required>
+          </div>
+          <button type="submit" class="btn-primary" id="reg-btn-submit">
+            <span id="t-registerBtn">पंजीकरण करें</span>
+          </button>
+          <div style="margin-top: 15px;">
+            <a href="#" onclick="handleLogout()" id="t-backToLogin" style="color: var(--color-text-muted); font-size: 13px; text-decoration: underline;">वापस लॉगिन पर जाएं</a>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: DASHBOARD -->
+    <section id="screen-dashboard" class="dashboard-wrapper" style="display: none;">
+      
+      <!-- User Profile Header -->
+      <div class="user-info-card">
+        <div class="user-profile-details">
+          <span class="user-name-tag" id="dashboard-user-name">आदिश जैन</span>
+          <div class="user-meta-info">
+            <span class="badge-role" id="dashboard-user-role">Member</span>
+            <span id="dashboard-user-team">टीम: नवकार वारियर्स</span>
+            <span>|</span>
+            <span id="logout-link" class="logout-link">लॉगआउट</span>
+          </div>
+        </div>
+        
+        <!-- Score Circular Badge -->
+        <div class="score-badge-circle">
+          <span class="score-value" id="runs-display-val">0</span>
+          <span class="score-unit" id="t-runsUnit">रन</span>
+        </div>
+      </div>
+      
+      <!-- Score Dashboard details banner -->
+      <div class="score-dashboard">
+        <div class="score-text-container">
+          <span class="score-title" id="t-totalRuns">आपका कुल स्कोर</span>
+          <span class="score-subtitle" id="app-subtitle">चातुर्मास आराधना ट्रैकर (9 अगस्त से 15 सितम्बर)</span>
+          <span id="captain-bonus-indicator" class="badge-role captain" style="display: none; margin-top: 8px;"></span>
+        </div>
+      </div>
+
+      <!-- Report Card Actions -->
+      <div class="action-buttons-bar" style="display: flex; gap: 12px; margin-top: -10px; margin-bottom: 20px;">
+        <button id="btn-report-card" class="btn-primary" style="background: linear-gradient(135deg, var(--color-maroon), var(--color-gold)); flex: 1; border: none; font-weight: bold; border-radius: 12px;">
+          <span id="t-reportCardBtn">🏆 रिपोर्ट कार्ड डाउनलोड / शेयर</span>
+        </button>
+      </div>
+
+      <!-- Calendar day slider -->
+      <div class="calendar-slider">
+        <div class="calendar-header">
+          <span class="calendar-title" id="t-selectDate">दिन का चयन करें</span>
+          <span class="current-month-display" id="calendar-month-val">अगस्त 2026</span>
+        </div>
+        <div class="days-scrollbar" id="days-scrollbar">
+          <!-- Dynamically populated day cards -->
+        </div>
+      </div>
+
+      <!-- Star description warning -->
+      <p id="t-starDesc" style="font-size: 12px; color: var(--color-text-muted); font-style: italic; margin-top: -8px; margin-bottom: -4px;">
+        * चिह्नित आराधना का विवरण नीचे पचक्खाण अनुभाग में देखें।
+      </p>
+
+      <!-- Category: 1 Run Quick Single -->
+      <div class="category-section">
+        <div class="category-header-bar">
+          <div class="category-title-container">
+            <span class="category-badge-run">1 Run</span>
+            <span class="category-title" id="t-runs1">1 रन - क्विक सिंगल</span>
+          </div>
+        </div>
+        <div class="activities-list" id="run1-list">
+          <!-- Reactively generated activity items -->
+        </div>
+      </div>
+
+      <!-- Category: 4 Runs Management Boundary -->
+      <div class="category-section">
+        <div class="category-header-bar">
+          <div class="category-title-container">
+            <span class="category-badge-run four">4 Runs</span>
+            <span class="category-title" id="t-runs4">4 रन - मैनेजमेंट बाउंड्री</span>
+          </div>
+        </div>
+        <div class="activities-list" id="run4-list">
+          <!-- Reactively generated activity items -->
+        </div>
+      </div>
+
+      <!-- Category: 6 Runs It's A Sixer -->
+      <div class="category-section">
+        <div class="category-header-bar">
+          <div class="category-title-container">
+            <span class="category-badge-run six">6 Runs</span>
+            <span class="category-title" id="t-runs6">6 रन - इट्स अिक्सर</span>
+          </div>
+        </div>
+        <div class="activities-list" id="run6-list">
+          <!-- Reactively generated activity items -->
+        </div>
+      </div>
+
+      <!-- Category: One Time Special Scores -->
+      <div class="category-section">
+        <div class="category-header-bar">
+          <div class="category-title-container">
+            <span class="category-badge-run onetime">6 Runs</span>
+            <span class="category-title" id="t-runsOnetime">विशेष एक-बार स्कोर (6 रन)</span>
+          </div>
+        </div>
+        <div class="activities-list" id="onetime-list">
+          <!-- One-time scores populated -->
+        </div>
+      </div>
+
+      <!-- Cloud Synchronizer Status Footer -->
+      <div class="sync-status-bar">
+        <div class="sync-dot synced" id="sync-dot"></div>
+        <span id="sync-text">क्लाउड से सुरक्षित जुड़ा है</span>
+        <button id="sync-retry" class="sync-retry-btn" style="display: none;">पुनः प्रयास करें</button>
+      </div>
+
+      <!-- References & Pachkklan section -->
+      <div class="reference-card">
+        <h3 class="category-title" id="t-rulesRef" style="border-bottom: 2px solid var(--bg-primary); padding-bottom: 10px;">पचक्खाण और धार्मिक संदर्भ</h3>
+        
+        <div class="ref-tabs-header">
+          <button class="ref-tab-btn active" data-tab="pachkklan">तप पचक्खाण पाठ</button>
+          <button class="ref-tab-btn" data-tab="prayers">प्रार्थना (लोगस्स)</button>
+          <button class="ref-tab-btn" data-tab="rules14">श्रावक के 14 नियम</button>
+          <button class="ref-tab-btn" data-tab="ramaamritam">रामामृतम ध्यान</button>
+          <button class="ref-tab-btn" data-tab="league-rules">लीग नियम</button>
+        </div>
+
+        <!-- Tab Content 1: Fasts definition & texts -->
+        <div class="ref-tab-content active" id="tab-content-pachkklan">
+          <div class="ref-definition-item">
+            <div class="ref-definition-title">चौविहार (Chouvihaar)</div>
+            <div>सूर्यास्त (Sunset) के बाद अन्न/पानी/सूखे मेवे/मुखवास आदि का त्याग सूर्योदय तक।</div>
+            <div class="ref-prayer-text" style="margin-top: 8px;">
+              <b>पचक्खाण पाठ:</b> गंठिसहियं, मुट्ठिसहियं, नमुक्कारसिहियं, पोरिसयं, साढपोरिसयं, तिविहंपि, चउव्विहंपि आहारं - असणं, पाणं, खाइमं, साइमं वोसिरामि |
+            </div>
+          </div>
+          <div class="ref-definition-item">
+            <div class="ref-definition-title">बियासना (Biyasna)</div>
+            <div>सूर्यास्त के बाद दिन में केवल 2 बार एक ही आसन में बैठकर भोजन करना। धोवन या गरम पानी पी सकते हैं। सूर्यास्त के उपरांत अन्न-जल का त्याग।</div>
+            <div class="ref-prayer-text" style="margin-top: 8px;">
+              <b>पचक्खाण पाठ:</b> बियासणं पच्चक्खामि तिविहंपि आहारं - असणं, खाइमं, साइमं, अणत्थणाभोगेणं, सहसागारेणं, आउंटणपसारेणं, गुरुअब्भुट्टाणेणं, महत्तरगारेणं, सव्वसमाहिवत्तियागारेणं वोसिरामि |
+            </div>
+          </div>
+          <div class="ref-definition-item">
+            <div class="ref-definition-title">एकासन (Ekasana)</div>
+            <div>सूर्योदय से सूर्यास्त के बीच में (दिन में) केवल 1 बार एक ही आसन में बैठकर भोजन-पानी ग्रहण करना।</div>
+            <div class="ref-prayer-text" style="margin-top: 8px;">
+              <b>पचक्खाण पाठ:</b> एकासणं पच्चक्खामि तिविहंपि आहारं - असणं, खाइमं, साइमं, अणत्थणाभोगेणं, सहसागारेणं, आउंटणपसारेणं, गुरुअब्भुट्टाणेणं, महत्तरगारेणं, सव्वसमाहिवत्तियागारेणं वोसिरामि |
+            </div>
+          </div>
+          <div class="ref-definition-item">
+            <div class="ref-definition-title">9 उपवास (Upvas)</div>
+            <div>सूर्योदय से सूर्यास्त के बीच किसी भी प्रकार के आहार का त्याग। सिर्फ धोवन या गरम पानी पी सकते हैं। सूर्यास्त के बाद चौविहार।</div>
+            <div class="ref-prayer-text" style="margin-top: 8px;">
+              <b>पचक्खाण पाठ:</b> उग्गए सूरे चउव्विहं पच्चक्खामि आहारं - असणं, पाणं, खाइमं, साइमं, अणत्थणाभोगेणं, सहसागारेणं वोसिरामि |
+            </div>
+          </div>
+          <div class="ref-definition-item">
+            <div class="ref-definition-title">आयंिबल (Ayambil)</div>
+            <div>सिके हुए या उबले हुए अनाज व दालों के अलावा कुछ भी ग्रहण नहीं करना। दूध, दही, घी, तेल, गुड़, चीनी, नींबू, कॉफी, ड्राई फ्रूट्स, गरम मसाले आदि का त्याग।</div>
+            <div class="ref-prayer-text" style="margin-top: 8px;">
+              <b>पचक्खाण पाठ:</b> आयंबिलं पच्चक्खामि अणत्थणाभोगेणं, सहसागारेणं, लेवालेवेणं, उच्छिण्णविवेंगेणं, गिहत्थसंसिट्ठेणं, पारिट्ठावणियागारेणं, महत्तरगारेणं, सव्वसमाहिवत्तियागारेणं वोसिरामि |
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Content 2: Prayers -->
+        <div class="ref-tab-content" id="tab-content-prayers">
+          <div class="ref-prayer-text">
+            <b>लोगस्स (Logassa Path)</b><br><br>
+            लोगुज्जोयगरे धम्मतित्थयरे जिणे। अरिहंते कित्तइस्सं चउवीसं पि केवलि ॥१॥<br>
+            उसभमजियं च वंदे संभवमभिणंदणं च सुमइं च। पउमप्पहं सुपासं जिणं च चंदप्पहं वंदे ॥२॥<br>
+            सुविहिं च पुप्फदंतं सीयल-सिज्जंस-वासुपुज्जं च। विमलमणंतं च जिणं धम्मं संतिं च वंदामि ॥३॥<br>
+            कुंथुं अरं च मल्लिं वंदे मुणिसुव्वयं नमिजिणं च। वंदामि रिट्ठनेमिं पासं तह वद्धमाणं च ॥४॥<br>
+            एवं मए अभित्थुआ विहुयरयमला पहीणजरमरणा। चउवीसं पि जिणवरा तित्थयरा मे पसीयंतु ॥५॥<br>
+            कित्तिय-वंदिय-महिया जे ए लोगस्स उत्तमा सिद्धा। आरुग्ग-बोहिलाभं समाहिवरमुत्तमं दिंतु ॥६॥<br>
+            चंदेसु निम्मलयरा आइच्चेसु अहियं पयासयरा। सागरवरगंभीरा सिद्धा सिद्धिं मम दिसंतु ॥७॥
+          </div>
+          <div class="ref-prayer-text" style="margin-top: 15px;">
+            <b>णमोत्थुणं (Namutthunam Path)</b><br><br>
+            णमोत्थुणं अरिहंताणं भगवंताणं, आइगराणं तित्थयराणं सयंसंबुद्धाणं।<br>
+            पुरिसुत्तमाणं पुरिससीहाणं पुरिसवरपुंडरीआणं पुरिसवरगंधहत्थीणं।<br>
+            लोगुत्तमाणं लोगनाहाणं लोगहिआणं लोगपईवाणं लोगपज्जोअगराणं।<br>
+            अभयदयाणं चक्खुदयाणं मग्गदयाणं सरणदयाणं बोहिदयाणं।<br>
+            धम्मदयाणं धम्मदेसयाणं धम्मनायगाणं धम्मसारहीणं धम्मवरचाउरंतचक्कवट्टीणं।<br>
+            दीवो ताणं सरणं गइ पटिट्ठा अप्पडिहयवरनाणदंसणधराणं विअट्टछउमाणं।<br>
+            जिणाणं जावयाणं तिण्णाणं तारयाणं बुद्धाणं बोहयाणं मुत्ताणं मोयगाणं।<br>
+            सव्वण्णूणं सव्वदरिसीणं सिवमयलमरुयमणंतमक्खयमव्वाबाहमपुणरावित्ति सिद्धगइनामधेयं ठाणं संपत्ताणं णमो जिणाणं जिअभयाणं।
+          </div>
+        </div>
+
+        <!-- Tab Content 3: Shravak 14 rules -->
+        <div class="ref-tab-content" id="tab-content-rules14">
+          <div style="background-color: var(--bg-primary); padding: 16px; border-radius: 16px; color: var(--color-text-dark);">
+            <b>दैनिक मर्यादा नियम (Daily Limits Vows):</b><br><br>
+            <ol class="ref-rules-list" style="margin-left: 20px; line-height: 1.6;">
+              <li><b>सचित्त:</b> सचित्त वस्तुएं जो भी खाने-पीने में आएं उनकी जाति की संख्या (जैसे: कच्ची सब्जी, पानी, इलायची, आदि)। शस्त्र/अग्नि परिणत होने पर अचित्त हो जाती हैं।</li>
+              <li><b>द्रव्य:</b> जितनी खाने-पीने की वस्तुएं दिनभर में काम में आएं, उनकी मर्यादा।</li>
+              <li><b>विगय-महाविगय:</b> मक्खन-शहद का त्याग। विगय (दूध, दही, घी, तेल, मीठा व तले पदार्थ) में से कम से कम एक का त्याग या मर्यादा।</li>
+              <li><b>उपानह:</b> जूते, चप्पल आदि पहनने की सीमा।</li>
+              <li><b>तांबूल:</b> पान, मुखवास, सुपारी आदि का सीमा निर्धारण।</li>
+              <li><b>वस्त्र:</b> पहनने व ओढ़ने के कपड़ों की गिनती व सीमा।</li>
+              <li><b>कुसुम:</b> इत्र, सुगन्धित तेल, चन्दन, फूल आदि खुशबूदार वस्तुओं की सीमा।</li>
+              <li><b>वाहन:</b> गाड़ी, स्कूटर, लिफ्ट आदि यात्रा साधनों की सीमा।</li>
+              <li><b>शयन:</b> बिस्तर, पलंग, गद्दे, रजाई, चादर, तकिया, कुर्सी, फर्नीचर आदि की मर्यादा।</li>
+              <li><b>विलेपन:</b> साबुन, cream, powder, तेल आदि सौंदर्य प्रसाधन की सीमा।</li>
+              <li><b>ब्रह्मचर्य:</b> दिनभर के लिए कुशील (मैथुन) का त्याग या मर्यादा।</li>
+              <li><b>दिशा:</b> चारों दिशाओं में आने-जाने की किलोमीटर की मर्यादा।</li>
+              <li><b>स्नान:</b> सिर या शरीर पर पानी डालकर स्नान करना बड़ी स्नान है। हाथ, पैर, मुंह धोना छोटी स्नान है। इसकी मर्यादा करना।</li>
+              <li><b>भक्त:</b> दिनभर में भोजन-पानी करने की आवृत्ति की मर्यादा (जैसे breakfast, lunch, snacks, dinner)।</li>
+            </ol>
+            <div style="margin-top: 15px; border-top: 1px solid var(--color-border); padding-top: 10px; font-size: 13.5px; font-style: italic;">
+              <b>लेने का पच्चक्खाण पाठ:</b> "इस प्रकार जो मैंने मर्यादा व आगार रखे हैं, उसके उपरांत अपनी समझ व धारणा अनुसार उपयोग सहित एगविहं तिविहेण न करेमि, मणसा, वयसा, कायसा तस्स भंते पडिक्कमामि निंदामि गरिहामि अप्पाणं वोसिरामि |"
+            </div>
+            <div style="margin-top: 8px; font-size: 13.5px; font-style: italic;">
+              <b>पालने का पच्चक्खाण पाठ:</b> "जो मे देसावकासियं पच्चक्खाणं कयं तस्स जे अइचारा कया... तस्स मिच्छामि दुक्कडं |" (अथवा कल धारण किये नियमों में कोई अतिचार दोष लगा हो तो मिच्छामि दुक्कडं |)
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Content 4: Ramaamritam dhyan -->
+        <div class="ref-tab-content" id="tab-content-ramaamritam">
+          <div style="background-color: var(--bg-primary); padding: 16px; border-radius: 16px; color: var(--color-text-dark);">
+            <b>रामामृतम ध्यान विधि (Meditation Process):</b><br><br>
+            <ol style="margin-left: 20px; line-height: 1.6; margin-bottom: 15px;">
+              <li>आराध्य देव व पूज्य गुरुदेव को भावपूर्वक वंदन कर (संवर पूर्वक) सुखासन में बैठें। 2 मिनट स्थिर बैठे रहें।</li>
+              <li>आँखें बंद, हाथ ज्ञान मुद्रा में व शरीर को सहज ध्यान अवस्था में रखें।</li>
+              <li>फिर एक सहज लंबी धीमी श्वास लेकर मूलाधार केंद्र पर ध्यान केंद्रित करें। ध्येय पद का उच्चारण करें और अंतिम 'म्' (मकार अनुस्वार) के उच्चारण की तरंगों को शुद्ध प्रकाश के साथ मूलाधार पर अनुभव करें।</li>
+              <li>पुनः दूसरी लंबी श्वास लेकर इसी प्रक्रिया को 3 बार दोहराएँ। इस तरह प्रत्येक केंद्र पर उससे संबंधित सूत्र (बीज मंत्र) का उच्चारण करें।</li>
+              <li>अन्त में सातों केंद्रों पर उपर्युक्त विधि पूरी होने पर 2 मिनट तक शांत भाव से आज्ञा केंद्र पर ध्यान केंद्रित कर "रामामृतम्" का अनुभव करें।</li>
+            </ol>
+            <p style="font-size: 12.5px; color: var(--color-text-muted); margin-bottom: 15px;">* आगे के चरण सीखना हो तो म.सा. (महाराज साहब) से ले सकते हैं। पाँचों चरण करना श्रेयस्कर है।</p>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13.5px;">
+              <thead>
+                <tr style="background-color: var(--color-saffron-light); color: var(--color-maroon); border-bottom: 2px solid var(--color-border);">
+                  <th style="padding: 8px; text-align: left; border: 1px solid var(--color-border);">क्र. सं.</th>
+                  <th style="padding: 8px; text-align: left; border: 1px solid var(--color-border);">केंद्र (Chakra)</th>
+                  <th style="padding: 8px; text-align: left; border: 1px solid var(--color-border);">बीज मंत्र (Sutra)</th>
+                  <th style="padding: 8px; text-align: left; border: 1px solid var(--color-border);">शरीर स्थान (Location)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">1</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);"><b>मूलाधार</b></td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">ध्रुं</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">रीढ़ की हड्डी का निचला भाग</td>
+                </tr>
+                <tr style="background-color: rgba(0,0,0,0.02);">
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">2</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);"><b>स्वाधिष्ठान</b></td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">वीरं</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">नाभि से 3.5 सेमी नीचे</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">3</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);"><b>मणिपुर</b></td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">सोहं</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">नाभि</td>
+                </tr>
+                <tr style="background-color: rgba(0,0,0,0.02);">
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">4</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);"><b>अनाहत</b></td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">बुद्धं</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">हृदय का केंद्र</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">5</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);"><b>विशुद्ध</b></td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">शुद्धं</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">कंठ</td>
+                </tr>
+                <tr style="background-color: rgba(0,0,0,0.02);">
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">6</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);"><b>आज्ञा</b></td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">शांतं</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">दोनों भौंहों के बीच में (भ्रूमध्य)</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">7</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);"><b>सहस्रार</b></td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">अहम्</td>
+                  <td style="padding: 8px; border: 1px solid var(--color-border);">मस्तक के बीच</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab Content 5: League Rules -->
+        <div class="ref-tab-content" id="tab-content-league-rules">
+          <div style="background-color: var(--bg-primary); padding: 16px; border-radius: 16px;">
+            <ol class="ref-rules-list">
+              <li>APL 9 अगस्त 2026 से प्रारंभ होकर 15 सितम्बर 2026 तक चलेगा।</li>
+              <li>APL में 5 लोगों की टीम बनानी है। अपनी टीम का नाम lead को दें।</li>
+              <li>हर टीम का एक कैप्टन रहेगा, जो हर शनिवार को लीडर को स्कोर अपडेट करेगा।</li>
+              <li>एक सदस्य केवल एक ही टीम में भाग ले सकेगा।</li>
+              <li>APL विजेताओं की घोषणा 27 सितम्बर 2026 को होने की संभावना है।</li>
+              <li><b>गोले लगे बिंदु (Circled Items):</b> ①, ④, ⑤ (1 रन में) और ③ (4 रन में) तथा ②, ④, ⑤ (6 रन में) को यदि आप 1 से अधिक बार करते हैं, तो आपका स्कोर उतनी संख्या से गुणा किया जाएगा (जैसे: गुरु वंदन 3 बार किया तो 1 रन x 3 = 3 रन)।</li>
+              <li><b>कैप्टन डबल स्कोर नियम:</b> टीम का कैप्टन जो भी आराधना करेगा उसका व्यक्तिगत दैनिक स्कोर <b>दोगुना (2x)</b> गिना जाएगा।</li>
+              <li>जहाँ भी "स्थानक" शब्द आया है, उसका अर्थ हनुमंत नगर चोरड़िया भवन समझना।</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- REPORT CARD MODAL -->
+  <div id="report-modal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 16px; box-sizing: border-box;">
+    <div class="modal-content" style="background: #fff; border-radius: 20px; width: 100%; max-width: 500px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; max-height: 90vh; overflow-y: auto;">
+      <span class="close-modal" id="close-report-modal" style="position: absolute; top: 15px; right: 20px; font-size: 28px; cursor: pointer; color: var(--color-text-muted);">&times;</span>
+      
+      <h3 style="color: var(--color-maroon); margin-top: 0; font-size: 20px; border-bottom: 2px solid var(--bg-primary); padding-bottom: 12px;" id="t-reportTitle">आराधना रिपोर्ट कार्ड</h3>
+      
+      <!-- Report Preview Area -->
+      <div id="report-preview" style="background: var(--bg-primary); border: 2px dashed var(--color-saffron-light); padding: 20px; border-radius: 12px; margin: 15px 0; font-family: monospace; white-space: pre-wrap; font-size: 13.5px; color: var(--color-text-dark); line-height: 1.5; max-height: 250px; overflow-y: auto; text-align: left;">
+        <!-- Dynamically generated preview -->
+      </div>
+      
+      <!-- Modal Action Buttons -->
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <button id="btn-download-txt" class="btn-primary" style="background: var(--color-gold); color: #fff; border: none; font-weight: bold; border-radius: 10px; padding: 12px 20px;">
+          📥 पाठ फ़ाइल डाउनलोड करें (.txt)
+        </button>
+        <button id="btn-copy-wa" class="btn-primary" style="background: #25d366; color: #fff; border: none; font-weight: bold; border-radius: 10px; padding: 12px 20px;">
+          💬 व्हाट्सएप संदेश कॉपी करें
+        </button>
+        <button id="btn-print-card" class="btn-primary" style="background: var(--color-maroon); color: #fff; border: none; font-weight: bold; border-radius: 10px; padding: 12px 20px;">
+          🖨️ रिपोर्ट कार्ड प्रिंट करें (PDF)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load script at bottom -->
+  <script src="app.js?v=2.0.2"></script>
+</body>
+</html>

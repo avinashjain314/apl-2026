@@ -25,52 +25,68 @@ let state = {
 // Activity Definitions
 const ACTIVITIES = [
   // === 1 RUN QUICK SINGLE ===
-  { id: "run1_item1", category: "run1", index: 1, score: 1, circled: true, textHi: "तीन बार गुरु वंदन करने पर", textEn: "Doing Guru Vandan three times" },
-  { id: "run1_item2", category: "run1", index: 2, score: 1, circled: false, textHi: "रोज उठने पर 11 बार नवकार मंत्र बोलना", textEn: "Chanting Namokar Mantra 11 times upon waking up" },
-  { id: "run1_item3", category: "run1", index: 3, score: 1, circled: false, textHi: "पारिवारिक जन से मिलने पर जय जिनेन्द्र बोलना", textEn: "Saying Jai Jinendra upon meeting family members" },
-  { id: "run1_item4", category: "run1", index: 4, score: 1, circled: true, textHi: "किसी व्यक्ति का 1 गुण लिखना (Notebook में)", textEn: "Writing 1 good quality of someone in a notebook" },
-  { id: "run1_item5", category: "run1", index: 5, score: 1, circled: true, textHi: "किसी व्यक्ति को जाकर एक उनका गुण बताना", textEn: "Going and telling someone one of their good qualities" },
-  { id: "run1_item6", category: "run1", index: 6, score: 1, circled: false, textHi: "कोई भी प्रकार का Social Media use नहीं करना (after 10:00 PM)", textEn: "Not using any social media after 10:00 PM" },
-  { id: "run1_item7", category: "run1", index: 7, score: 1, circled: false, textHi: "1 Dress/साड़ी से ज्यादा नहीं पहनना (except सामायिक dress)", textEn: "Not wearing more than 1 dress/saree (excluding Samayik dress)" },
-  { id: "run1_item8", category: "run1", index: 8, score: 1, circled: false, textHi: "उपवास करने पर*", textEn: "Doing Upvas (Fasting)*" },
-  { id: "run1_item9", category: "run1", index: 9, score: 1, circled: false, textHi: "1 विगय का त्याग करने पर*", textEn: "Giving up 1 Vigay (curd, milk, oil, ghee, sugar, etc.)*" },
-  { id: "run1_item10", category: "run1", index: 10, score: 1, circled: false, textHi: "\"मानव का शुभ तन मन पाया, व्रतधारी बनो व्रतधारी बनो\" (11 बार बोलना)", textEn: "Chanting 'Manav ka shubh tan man paya...' 11 times" },
-  { id: "run1_item11", category: "run1", index: 11, score: 1, circled: false, textHi: "लोगस्स की एक गाथा याद करना", textEn: "Memorizing one gatha of Logassa" },
-  { id: "run1_item12", category: "run1", index: 12, score: 1, circled: false, textHi: "11 बजे के उपरांत भोजन नहीं लेना", textEn: "No eating/drinking after 11:00 PM" },
-  { id: "run1_item13", category: "run1", index: 13, score: 1, circled: false, textHi: "बाजार की मिठाई नमकीन का त्याग", textEn: "Renouncing market sweets and namkeen" },
+  { id: "run1_item1", category: "run1", index: 1, score: 1, circled: true, textHi: "तीन बार गुरु वंदन करने पर", textEn: "Doing Guru Vandan 3 times" },
+  { id: "run1_item2", category: "run1", index: 2, score: 1, circled: false, textHi: "रोज उठने पर 11 बार नवकार मंत्र बोलना", textEn: "Chanting Navkar Mantra 11 times upon waking" },
+  { id: "run1_item3", category: "run1", index: 3, score: 1, circled: false, textHi: "पारिवारिक जन से मिलने पर जय जिनेन्द्र बोलना", textEn: "Saying Jai Jinendra when meeting family members" },
+  { id: "run1_item4", category: "run1", index: 4, score: 1, circled: true, textHi: "किसी व्यक्ति का 1 गुण लिखना (Notebook में)", textEn: "Writing down 1 good quality of someone in a notebook" },
+  { id: "run1_item5", category: "run1", index: 5, score: 1, circled: true, textHi: "किसी व्यक्ति को जाकर एक उनका गुण बताना", textEn: "Telling someone one of their good qualities" },
 
   // === 4 RUNS MANAGEMENT BOUNDARY ===
-  { id: "run4_item1", category: "run4", index: 1, score: 4, circled: false, textHi: "बियासना करना*", textEn: "Doing Biyasna (eating twice a day in one sitting)*" },
-  { id: "run4_item2", category: "run4", index: 2, score: 4, circled: false, textHi: "जमीकंद का त्याग करना*", textEn: "Giving up underground vegetables (potatoes, onions, etc.)*" },
-  { id: "run4_item3", category: "run4", index: 3, score: 4, circled: true, textHi: "14 नियमों में से कोई भी 2 नियम ग्रहण करने पर*", textEn: "Accepting any 2 rules out of the Shravak's 14 rules*" },
-  { id: "run4_item4", category: "run4", index: 4, score: 4, circled: false, textHi: "पूरे दिन में Lift का उपयोग नहीं करने पर", textEn: "Not using the elevator the whole day" },
-  { id: "run4_item5", category: "run4", index: 5, score: 4, circled: false, textHi: "पूरे दिन में चप्पल का त्याग", textEn: "Renouncing footwear for the whole day" },
-  { id: "run4_item6", category: "run4", index: 6, score: 4, circled: false, textHi: "पूरे दिन में संयोजना का त्याग*", textEn: "Renouncing food combinations (Samyojana) for the whole day*" },
-  { id: "run4_item7", category: "run4", index: 7, score: 4, circled: false, textHi: "2 विगय का त्याग करने पर", textEn: "Giving up 2 types of Vigay" },
-  { id: "run4_item8", category: "run4", index: 8, score: 4, circled: false, textHi: "रामामृतम का ध्यान करने पर (प्रथम चरण)*", textEn: "Practicing Ramaamritam Meditation (first stage)*" },
-  { id: "run4_item9", category: "run4", index: 9, score: 4, circled: false, textHi: "1 दिन पूर्ण रूप से ब्रह्मचर्य का पालन करना", textEn: "Observing complete celibacy (Brahmacharya) for 1 full day" },
-  { id: "run4_item10", category: "run4", index: 10, score: 4, circled: false, textHi: "\"शरीर की सुंदरता में सुख नहीं है\" (11 बार बोलना)", textEn: "Chanting 'Shareer ki sundarta mein sukh nahi hai' 11 times" },
-  { id: "run4_item11", category: "run4", index: 11, score: 4, circled: false, textHi: "पूरे दिन में दर्पण (Mirror) नहीं देखने पर", textEn: "Not looking in the mirror for the whole day" },
-  { id: "run4_item12", category: "run4", index: 12, score: 4, circled: false, textHi: "रात्रि भोजन त्याग करने पर", textEn: "Giving up food after sunset (Ratri Bhojan Tyag)" },
-  { id: "run4_item13", category: "run4", index: 13, score: 4, circled: false, textHi: "धार्मिक पुस्तक का एक पेज पढ़ने पर", textEn: "Reading one page of a religious book" },
+  { id: "run4_item1", category: "run4", index: 1, score: 4, circled: false, textHi: "बियासना करना*", textEn: "Observing Biyasna (eating twice a day in one sitting)*" },
+  { id: "run4_item2", category: "run4", index: 2, score: 4, circled: false, textHi: "जमीकंद का त्याग करना *", textEn: "Renouncing root vegetables (Zaminkand)*" },
+  { id: "run4_item3", category: "run4", index: 3, score: 4, circled: true, textHi: "14 नियमों में से कोई भी 2 नियम ग्रहण करने पर*", textEn: "Observing any 2 rules out of the 14 rules*" },
+  { id: "run4_item4", category: "run4", index: 4, score: 4, circled: false, textHi: "पूरे दिन में Lift का उपयोग नहीं करने पर", textEn: "Not using the lift/elevator for the entire day" },
+  { id: "run4_item5", category: "run4", index: 5, score: 4, circled: false, textHi: "पूरे दिन में चप्पल का त्याग", textEn: "Renouncing slippers/footwear for the entire day" },
 
   // === 6 RUNS IT'S A SIXER ===
-  { id: "run6_item1", category: "run6", index: 1, score: 6, circled: false, textHi: "पूरा दिन Angry / गुस्सा नहीं करने पर", textEn: "Not getting angry the whole day" },
-  { id: "run6_item2", category: "run6", index: 2, score: 6, circled: true, textHi: "1 सामायिक करने पर [घर में भी मान्य]*", textEn: "Doing 1 Samayik [even at home]*" },
+  { id: "run6_item1", category: "run6", index: 1, score: 6, circled: false, textHi: "पूरा दिन Angry / गुस्सा नहीं करने पर", textEn: "Not getting angry for the entire day" },
+  { id: "run6_item2", category: "run6", index: 2, score: 6, circled: true, textHi: "1 सामायिक करने पर [घर में भी मान्य]*", textEn: "Doing 1 Samayik [valid at home too]*" },
   { id: "run6_item3", category: "run6", index: 3, score: 6, circled: false, textHi: "णमो नाणस्स की 1 माला फेरने पर", textEn: "Chanting 1 mala of 'Namo Nanam'" },
-  { id: "run6_item4", category: "run6", index: 4, score: 6, circled: true, textHi: "2 लोगस्स करने पर [तीर्थंकर भगवान की स्तुति है]*", textEn: "Doing 2 Logassa [Tirthankar Stuti]*" },
+  { id: "run6_item4", category: "run6", index: 4, score: 6, circled: true, textHi: "2 लोगस्स करने पर (तीर्थंकर भगवान की स्तुति है)*", textEn: "Chanting 2 Logassa [Tirthankar Stuti]*" },
   { id: "run6_item5", category: "run6", index: 5, score: 6, circled: true, textHi: "2 णमोत्थुणं करने पर (तीर्थंकर भगवंतों के गुणाणुवाद)", textEn: "Chanting 2 Namutthunam (Tirthankar praises)" },
   { id: "run6_item6", category: "run6", index: 6, score: 6, circled: false, textHi: "एकासन करने पर*", textEn: "Doing Ekasan (eating once a day in one sitting)*" },
-  { id: "run6_item7", category: "run6", index: 7, score: 6, circled: false, textHi: "\"क्रोध को क्षमा से, मान को नम्रता से, लोभ को संतोष से मैं जीतूं\" (11 बार बोलना)", textEn: "Chanting 'Krodh ko kshama se...' 11 times" },
+  { id: "run6_item7", category: "run6", index: 7, score: 6, circled: true, textHi: "\"क्रोध को क्षमा से, मान को नम्रता से, लोभ को संतोष से मैं जीतूं\" (11 बार बोलना)", textEn: "Chanting 'Krodh ko kshama se...' 11 times" },
   { id: "run6_item8", category: "run6", index: 8, score: 6, circled: false, textHi: "एक भजन गाना", textEn: "Singing one bhajan" },
-  { id: "run6_item9", category: "run6", index: 9, score: 6, circled: false, textHi: "रात्रि चौविहार करने पर", textEn: "Observing Ratri Chouvihaar (no food/water after sunset)" },
-  { id: "run6_item10", category: "run6", index: 10, score: 6, circled: false, textHi: "भक्तांबर की 2 गाथाएं याद करना", textEn: "Memorizing 2 gathas of Bhaktamar Stotra" },
-  { id: "run6_item11", category: "run6", index: 11, score: 6, circled: false, textHi: "पर्यूषण में एकांतर करना", textEn: "Doing Ekantar (alternate fasts) during Paryushan" },
-  { id: "run6_item12", category: "run6", index: 12, score: 6, circled: false, textHi: "होटल का त्याग करना", textEn: "Renouncing hotel food" },
 
-  // === ONE-TIME SPECIAL SCORES ===
-  { id: "onetime_item1", category: "onetime", index: 2, score: 6, circled: false, textHi: "2 माह (month) तक संपूर्ण ब्रह्मचर्य का पालन करने पर", textEn: "Observing complete celibacy (Brahmacharya) for 2 months" },
-  { id: "onetime_item2", category: "onetime", index: 3, score: 6, circled: false, textHi: "पूरी टीम के साथ दर्शन करने पर", textEn: "Doing temple darshan with the entire team" }
+  // === 20 RUNS MAKE A TWENTY FOLD ===
+  { id: "run20_item1", category: "run20", index: 1, score: 20, circled: false, textHi: "कोई भी प्रकार का Social Media use नहीं करना (after 10:00 pm)", textEn: "No social media use after 10:00 pm" },
+  { id: "run20_item2", category: "run20", index: 2, score: 20, circled: false, textHi: "1 Dress/साड़ी से ज्यादा नहीं पहनना (except सामायिक dress)", textEn: "Wearing not more than 1 dress/sari (except Samayik dress)" },
+  { id: "run20_item3", category: "run20", index: 3, score: 20, circled: false, textHi: "उपवास करने पर *", textEn: "Doing Upvas (complete fast)*" },
+  { id: "run20_item4", category: "run20", index: 4, score: 20, circled: false, textHi: "1 विगय का त्याग करने पर *", textEn: "Renouncing 1 Vigay (milk, curd, ghee, oil, sweets, etc.)*" },
+  { id: "run20_item5", category: "run20", index: 5, score: 20, circled: false, textHi: "\"मानव् का शुभ तन मन पाया, व्रतधारी बनो व्रतधारी बनो\" (11 बार बोलना)", textEn: "Chanting 'Manav ka shubh tan man...' 11 times" },
+  { id: "run20_item6", category: "run20", index: 6, score: 20, circled: true, textHi: "लोगस्स की एक गाथा याद करना", textEn: "Memorizing 1 gatha of Logassa" },
+  { id: "run20_item7", category: "run20", index: 7, score: 20, circled: false, textHi: "11 द्रव्य के उपरांत नही लेना", textEn: "Not consuming more than 11 food items (dravyas)" },
+  { id: "run20_item8", category: "run20", index: 8, score: 20, circled: false, textHi: "बाजार की मिठाई नमकीन का त्याग", textEn: "Renouncing store-bought sweets and snacks" },
+
+  // === 50 RUNS HALF CENTURY ===
+  { id: "run50_item1", category: "run50", index: 1, score: 50, circled: false, textHi: "पूरे दिन में संयोजना का त्याग *", textEn: "Renouncing food combinations (Sanyojana) for the entire day*" },
+  { id: "run50_item2", category: "run50", index: 2, score: 50, circled: false, textHi: "2 विगय का त्याग करने पर", textEn: "Renouncing 2 Vigay (milk, curd, ghee, oil, sweets, etc.)" },
+  { id: "run50_item3", category: "run50", index: 3, score: 50, circled: false, textHi: "रामामृतम का ध्यान करने पर (प्रथम चरण)*", textEn: "Observing Ramaamritam meditation (Stage 1)*" },
+  { id: "run50_item4", category: "run50", index: 4, score: 50, circled: false, textHi: "1 दिन पूर्ण रूप से ब्रह्मचर्य का पालन करना", textEn: "Observing complete celibacy (Brahmacharya) for 1 full day" },
+  { id: "run50_item5", category: "run50", index: 5, score: 50, circled: false, textHi: "\"शरीर की सुन्दरता में सुख नहीं है\" (11 बार बोलना)", textEn: "Chanting 'Sharir ki sundarta...' 11 times" },
+  { id: "run50_item6", category: "run50", index: 6, score: 50, circled: false, textHi: "पूरे दिन में दर्पण (Mirror) नहीं देखने पर", textEn: "Not looking in the mirror for the entire day" },
+  { id: "run50_item7", category: "run50", index: 7, score: 50, circled: false, textHi: "रात्रि भोजन त्याग करने पर", textEn: "Renouncing food after sunset (Ratri Bhojan Tyag)" },
+  { id: "run50_item8", category: "run50", index: 8, score: 50, circled: true, textHi: "धार्मिक पुस्तक की एक पेज पढ़ने पर", textEn: "Reading 1 page of a religious book" },
+
+  // === 100 RUNS CENTURY ===
+  { id: "run100_item1", category: "run100", index: 1, score: 100, circled: false, textHi: "पूरे परिवार के साथ दर्शन करने पर (स्थानक में)", textEn: "Doing darshan with the entire family (in Sthanak)" },
+  { id: "run100_item2", category: "run100", index: 2, score: 100, circled: false, textHi: "रात्रि चौविहार करने पर", textEn: "Observing Ratri Chouvihaar (no food/water after sunset)" },
+  { id: "run100_item3", category: "run100", index: 3, score: 100, circled: false, textHi: "दिनभर में किसी भी व्यक्ति का स्पर्श/Touch नहीं करना", textEn: "Not touching anyone for the entire day (avoid physical touch)" },
+  { id: "run100_item4", category: "run100", index: 4, score: 100, circled: false, textHi: "घर में सभी members साथ मिलकर 1 प्रार्थना करना", textEn: "Chanting 1 prayer together with all family members at home" },
+  { id: "run100_item5", category: "run100", index: 5, score: 100, circled: true, textHi: "भक्तांबर की 2 गाथाए याद करना", textEn: "Memorizing 2 gathas of Bhaktamar Stotra" },
+  { id: "run100_item6", category: "run100", index: 6, score: 100, circled: true, textHi: "पर्यूषण में एकांतर करना", textEn: "Doing Ekantar (alternate fasts) during Paryushan" },
+  { id: "run100_item7", category: "run100", index: 7, score: 100, circled: false, textHi: "होटल का त्याग करना", textEn: "Renouncing hotel food" },
+
+  // === 200 RUNS DOUBLE CENTURY ===
+  { id: "run200_item1", category: "run200", index: 1, score: 200, circled: false, textHi: "3 की तपस्या / तेला करने पर", textEn: "Observing 3 fasts in a row (Tela)" },
+  { id: "run200_item2", category: "run200", index: 2, score: 200, circled: false, isOneTime: true, textHi: "\"No Shortcut Please\" book पढ़ने पर (One Time Score)", textEn: "Reading the book \"No Shortcut Please\" (One Time Score)" },
+  { id: "run200_item3", category: "run200", index: 3, score: 200, circled: false, isOneTime: true, textHi: "2 माहा (month) तक सम्पूर्ण ब्रह्मचर्य का पालन करने पर (One Time Score)", textEn: "Observing complete celibacy (Brahmacharya) for 2 months (One Time Score)" },
+  { id: "run200_item4", category: "run200", index: 4, score: 200, circled: false, textHi: "दिनभर में किसी भी प्रकार का Social Media use नहीं करना", textEn: "No social media use for the entire day" },
+
+  // === 500 RUNS MAHA ARADHANA ===
+  { id: "run500_item1", category: "run500", index: 1, score: 500, circled: false, textHi: "8 की तपस्या / अठाई करने पर", textEn: "Observing 8 fasts in a row (Athai)" },
+  { id: "run500_item2", category: "run500", index: 2, score: 500, circled: true, textHi: "स्थानक में 2 सामायिक करने से (in Sthanak)", textEn: "Doing 2 Samayik in Sthanak" },
+  { id: "run500_item3", category: "run500", index: 3, score: 500, circled: false, textHi: "पूरी टीम के साथ दर्शन करने पर (स्थानक में)", textEn: "Doing darshan with the entire team (in Sthanak)" }
 ];
 
 // UI Localization dictionary
@@ -115,6 +131,13 @@ const TRANSLATIONS = {
     starDesc: "* चिह्नित आराधना का विवरण नीचे पचक्खाण अनुभाग में देखें।",
     backToLogin: "वापस लॉगिन पर जाएं",
     invalidMobile: "कृपया वैध 10-अंकीय मोबाइल नंबर दर्ज करें।",
+    cityLabel: "शहर (City)",
+    cityPlaceholder: "अपने शहर का नाम दर्ज करें",
+    runs20: "20 रन - मेक अ ट्वेंटी फोल्ड",
+    runs50: "50 रन - हाफ सेंचुरी",
+    runs100: "100 रन - इट्स अ सेंचुरी",
+    runs200: "200 रन - डबल सेंचुरी",
+    runs500: "500 रन - महा आराधना",
     reportCardBtn: "🏆 रिपोर्ट कार्ड डाउनलोड / शेयर",
     reportTitle: "आराधना रिपोर्ट कार्ड",
     currentTitleLabel: "आपकी आध्यात्मिक पदवी:",
@@ -161,6 +184,13 @@ const TRANSLATIONS = {
     starDesc: "* Read details of starred items in the scripture reference section below.",
     backToLogin: "Go back to Login",
     invalidMobile: "Please enter a valid 10-digit mobile number.",
+    cityLabel: "City",
+    cityPlaceholder: "Enter your city",
+    runs20: "20 Runs - make a Twenty Fold",
+    runs50: "50 Runs - Half Century",
+    runs100: "100 Runs - it's a Century",
+    runs200: "200 Runs - It's a Double Century",
+    runs500: "500 Runs - Maha Aradhana",
     reportCardBtn: "🏆 Download / Share Report Card",
     reportTitle: "Aradhana Report Card",
     currentTitleLabel: "Your Spiritual Title:",
@@ -207,7 +237,7 @@ function calculateScore() {
     const dayData = state.trackerData[d.dateStr] || {};
     
     ACTIVITIES.forEach(act => {
-      if (act.category !== "onetime" && dayData[act.id]) {
+      if (!act.isOneTime && dayData[act.id]) {
         if (act.circled) {
           // Multiply run score by quantity marked
           const qty = dayData[act.id] || 0;
@@ -226,11 +256,11 @@ function calculateScore() {
     totalScore += dayScore;
   });
   
-  // 2. Add One-Time scores (not daily, not doubled by captain's daily role rules unless user wishes, but rule 10 says "captain who does aradhana, their score is double" so we double the total sum of their score!)
+  // 2. Add One-Time scores
   let oneTimeScore = 0;
   const oneTimeData = state.trackerData["onetime"] || {};
   ACTIVITIES.forEach(act => {
-    if (act.category === "onetime" && oneTimeData[act.id]) {
+    if (act.isOneTime && oneTimeData[act.id]) {
       oneTimeScore += act.score;
     }
   });
@@ -370,7 +400,7 @@ function updateLanguageUI() {
     "loginTitle", "loginSub", "mobileLabel", "nameLabel", "teamLabel", 
     "roleLabel", "ageLabel", "fhLabel", "loginBtn", "registerBtn",
     "registerTitle", "registerSub", "totalRuns", "runsUnit", "selectDate",
-    "runs1", "runs4", "runs6", "runsOnetime", "rulesRef", "starDesc", "backToLogin", "currentTitleLabel", "tabMilestones", "milestoneHeader"
+    "runs1", "runs4", "runs6", "runsOnetime", "rulesRef", "starDesc", "backToLogin", "currentTitleLabel", "tabMilestones", "milestoneHeader", "cityLabel", "runs20", "runs50", "runs100", "runs200", "runs500"
   ];
   
   tKeys.forEach(key => {
@@ -395,11 +425,12 @@ function updateLanguageUI() {
   // Bind user dynamic profile data to dashboard
   if (state.user) {
     document.getElementById("dashboard-user-name").innerText = state.user.name;
-    document.getElementById("dashboard-user-team").innerText = (state.currentLanguage === "hi" ? "टीम: " : "Team: ") + state.user.teamName;
+    
     const roleText = state.user.role === "Captain" 
       ? translations.roleCaptain 
       : translations.roleMember;
     document.getElementById("dashboard-user-role").innerText = roleText;
+    document.getElementById("dashboard-user-team").innerText = (state.currentLanguage === "hi" ? "टीम: " : "Team: ") + state.user.teamName + (state.user.city ? ` (${state.user.city})` : "");
 
     renderCalendar();
     renderActivities();
@@ -487,15 +518,12 @@ function renderActivities() {
     container.innerHTML = "";
     const items = ACTIVITIES.filter(a => a.category === category);
     
-    // Get marked items for active day/category
-    const isOneTime = category === "onetime";
-    const activeKey = isOneTime ? "onetime" : state.currentDate;
-    const markedData = state.trackerData[activeKey] || {};
-    
     items.forEach(act => {
       const row = document.createElement("div");
       row.className = "activity-row";
       
+      const activeKey = act.isOneTime ? "onetime" : state.currentDate;
+      const markedData = state.trackerData[activeKey] || {};
       const isChecked = !!markedData[act.id];
       if (isChecked) {
         row.classList.add("checked");
@@ -594,7 +622,11 @@ function renderActivities() {
   renderCategory("run1", "run1-list");
   renderCategory("run4", "run4-list");
   renderCategory("run6", "run6-list");
-  renderCategory("onetime", "onetime-list");
+  renderCategory("run20", "run20-list");
+  renderCategory("run50", "run50-list");
+  renderCategory("run100", "run100-list");
+  renderCategory("run200", "run200-list");
+  renderCategory("run500", "run500-list");
 }
 
 function updateMarkValue(dateKey, activityId, value) {
@@ -680,6 +712,7 @@ async function handleLogin(e) {
           name: result.userData.name,
           teamName: result.userData.teamName,
           role: result.userData.role,
+          city: result.userData.city || "",
           age: result.userData.age,
           fatherHusbandName: result.userData.fatherHusbandName
         };
@@ -751,6 +784,7 @@ function loginLocalDemo(mobile) {
     // Pre-fill name and other fields if previously filled to make it smooth
     document.getElementById("reg-name").value = "";
     document.getElementById("reg-team").value = "";
+    document.getElementById("reg-city").value = "";
     document.getElementById("reg-age").value = "";
     document.getElementById("reg-fh").value = "";
     
@@ -778,6 +812,7 @@ async function handleRegistration(e) {
     name: document.getElementById("reg-name").value.trim(),
     teamName: document.getElementById("reg-team").value.trim(),
     role: document.querySelector(".role-option.selected").dataset.role,
+    city: document.getElementById("reg-city").value.trim(),
     age: document.getElementById("reg-age").value.trim(),
     fatherHusbandName: document.getElementById("reg-fh").value.trim()
   };
@@ -955,10 +990,9 @@ window.addEventListener("load", () => {
 function generateReportData() {
   const score = calculateScore();
   const dateList = [];
-  const startParts = CONFIG.startDate.split("-");
-  const endParts = CONFIG.endDate.split("-");
-  let current = new Date(startParts[0], startParts[1] - 1, startParts[2]);
-  const end = new Date(endParts[0], endParts[1] - 1, endParts[2]);
+  const start = new Date(CONFIG.startDate);
+  const end = new Date(CONFIG.endDate);
+  const current = new Date(start);
   
   while (current <= end) {
     const yyyy = current.getFullYear();
@@ -971,7 +1005,11 @@ function generateReportData() {
   let cat1Count = 0;
   let cat4Count = 0;
   let cat6Count = 0;
-  let onetimeCount = 0;
+  let cat20Count = 0;
+  let cat50Count = 0;
+  let cat100Count = 0;
+  let cat200Count = 0;
+  let cat500Count = 0;
   let activeDays = 0;
   
   dateList.forEach(dateStr => {
@@ -979,24 +1017,29 @@ function generateReportData() {
     let dayHasActivity = false;
     
     ACTIVITIES.forEach(act => {
-      if (act.category !== "onetime" && dayData[act.id]) {
+      if (!act.isOneTime && dayData[act.id]) {
         dayHasActivity = true;
         const val = Number(dayData[act.id]) || 0;
-        if (act.category === "run1") cat1Count += val;
-        if (act.category === "run4") cat4Count += val;
-        if (act.category === "run6") cat6Count += val;
+        if (act.category === "run1") cat1Count += val * act.score;
+        if (act.category === "run4") cat4Count += val * act.score;
+        if (act.category === "run6") cat6Count += val * act.score;
+        if (act.category === "run20") cat20Count += val * act.score;
+        if (act.category === "run50") cat50Count += val * act.score;
+        if (act.category === "run100") cat100Count += val * act.score;
+        if (act.category === "run200") cat200Count += val * act.score;
+        if (act.category === "run500") cat500Count += val * act.score;
       }
     });
     
     if (dayHasActivity) activeDays++;
   });
   
-  // One-time scores
+  // One-time scores (rendered in categories e.g. run200_item2 and run200_item3)
   const onetimeData = state.trackerData["onetime"] || {};
   ACTIVITIES.forEach(act => {
-    if (act.category === "onetime" && onetimeData[act.id]) {
+    if (act.isOneTime && onetimeData[act.id]) {
       const val = Number(onetimeData[act.id]) || 0;
-      onetimeCount += val * 6; // 6 runs per item
+      if (act.category === "run200") cat200Count += val * act.score;
     }
   });
 
@@ -1005,7 +1048,11 @@ function generateReportData() {
     cat1Count,
     cat4Count,
     cat6Count,
-    onetimeCount,
+    cat20Count,
+    cat50Count,
+    cat100Count,
+    cat200Count,
+    cat500Count,
     activeDays,
     totalPossibleDays: dateList.length
   };
@@ -1026,6 +1073,7 @@ function getReportText() {
   text += (isHi ? "नाम (Name): " : "Name: ") + state.user.name + "\n";
   text += (isHi ? "पिता/पति (Father/Husband): " : "Father/Husband: ") + state.user.fatherHusbandName + "\n";
   text += (isHi ? "टीम (Team): " : "Team: ") + state.user.teamName + "\n";
+  text += (isHi ? "शहर (City): " : "City: ") + (state.user.city || "-") + "\n";
   text += (isHi ? "भूमिका (Role): " : "Role: ") + roleText + "\n";
   text += (isHi ? "मोबाइल (Mobile): " : "Mobile: ") + state.user.mobile + "\n";
   text += (isHi ? "आयु (Age): " : "Age: ") + state.user.age + "\n";
@@ -1038,7 +1086,12 @@ function getReportText() {
   text += (isHi ? "- क्विक सिंगल (1 रन): " : "- Quick Single (1 Run): ") + rep.cat1Count + " " + (isHi ? "रन" : "Runs") + "\n";
   text += (isHi ? "- मैनेजमेंट बाउंड्री (4 रन): " : "- Management Boundary (4 Runs): ") + rep.cat4Count + " " + (isHi ? "रन" : "Runs") + "\n";
   text += (isHi ? "- इट्स अ सिक्सर (6 रन): " : "- It's a Sixer (6 Runs): ") + rep.cat6Count + " " + (isHi ? "रन" : "Runs") + "\n";
-  text += (isHi ? "- विशेष एक-बार स्कोर (6 रन): " : "- Special One-Time (6 Runs): ") + rep.onetimeCount + " " + (isHi ? "रन" : "Runs") + "\n";
+  text += (isHi ? "- मेक अ ट्वेंटी फोल्ड (20 रन): " : "- make a Twenty Fold (20 Runs): ") + rep.cat20Count + " " + (isHi ? "रन" : "Runs") + "\n";
+  text += (isHi ? "- हाफ सेंचुरी (50 रन): " : "- Half Century (50 Runs): ") + rep.cat50Count + " " + (isHi ? "रन" : "Runs") + "\n";
+  text += (isHi ? "- इट्स अ सेंचुरी (100 रन): " : "- it's a Century (100 Runs): ") + rep.cat100Count + " " + (isHi ? "रन" : "Runs") + "\n";
+  text += (isHi ? "- डबल सेंचुरी (200 रन): " : "- It's a Double Century (200 Runs): ") + rep.cat20Count + " " + (isHi ? "रन" : "Runs") + "\n";
+  text += (isHi ? "- महा आराधना (500 रन): " : "- Maha Aradhana (500 Runs): ") + rep.cat500Count + " " + (isHi ? "रन" : "Runs") + "\n";
+  
   if (state.user.role === "Captain") {
     text += "\n* " + (isHi ? "कैप्टन बोनस 2x शामिल है" : "Captain Bonus 2x included") + "\n";
   }
@@ -1060,6 +1113,7 @@ function getWhatsAppText() {
   text += `👤 *नाम (Name):* ${state.user.name}\n`;
   text += `👴 *पिता/पति (Father/Husband):* ${state.user.fatherHusbandName}\n`;
   text += `👥 *टीम (Team):* ${state.user.teamName}\n`;
+  text += `📍 *शहर (City):* ${state.user.city || "-"}\n`;
   text += `🎖️ *भूमिका (Role):* ${roleText}\n`;
   text += `📱 *मोबाइल (Mobile):* ${state.user.mobile}\n`;
   text += `🎂 *आयु (Age):* ${state.user.age}\n`;
@@ -1070,7 +1124,11 @@ function getWhatsAppText() {
   text += `• क्विक सिंगल (1 रन): ${rep.cat1Count} रन\n`;
   text += `• मैनेजमेंट बाउंड्री (4 रन): ${rep.cat4Count} रन\n`;
   text += `• इट्स अ सिक्सर (6 रन): ${rep.cat6Count} रन\n`;
-  text += `• विशेष स्कोर: ${rep.onetimeCount} रन\n`;
+  text += `• मेक अ ट्वेंटी फोल्ड (20 रन): ${rep.cat20Count} रन\n`;
+  text += `• हाफ सेंचुरी (50 रन): ${rep.cat50Count} रन\n`;
+  text += `• इट्स अ सेंचुरी (100 रन): ${rep.cat100Count} रन\n`;
+  text += `• डबल सेंचुरी (200 रन): ${rep.cat200Count} Run\n`;
+  text += `• महा आराधना (500 रन): ${rep.cat500Count} Run\n`;
   if (state.user.role === "Captain") {
     text += "\n*(कैप्टन बोनस 2x स्कोर शामिल है)*\n";
   }
@@ -1206,6 +1264,10 @@ function printReportCard() {
           <span class="value">${state.user.teamName}</span>
         </div>
         <div class="profile-row">
+          <span class="label">शहर / City</span>
+          <span class="value">${state.user.city || "-"}</span>
+        </div>
+        <div class="profile-row">
           <span class="label">भूमिका / Role</span>
           <span class="value">${roleText}</span>
         </div>
@@ -1234,12 +1296,28 @@ function printReportCard() {
             <span class="value">${rep.cat4Count} रन</span>
           </div>
           <div class="profile-row">
-            <span class="label">इट्स अिक्सर (6 रन)</span>
+            <span class="label">इट्स अ सिक्सर (6 रन)</span>
             <span class="value">${rep.cat6Count} रन</span>
           </div>
           <div class="profile-row">
-            <span class="label">विशेष एक-बार स्कोर</span>
-            <span class="value">${rep.onetimeCount} रन</span>
+            <span class="label">मेक अ ट्वेंटी फोल्ड (20 रन)</span>
+            <span class="value">${rep.cat20Count} रन</span>
+          </div>
+          <div class="profile-row">
+            <span class="label">हाफ सेंचुरी (50 रन)</span>
+            <span class="value">${rep.cat50Count} रन</span>
+          </div>
+          <div class="profile-row">
+            <span class="label">इट्स अ सेंचुरी (100 रन)</span>
+            <span class="value">${rep.cat100Count} रन</span>
+          </div>
+          <div class="profile-row">
+            <span class="label">डबल सेंचुरी (200 रन)</span>
+            <span class="value">${rep.cat200Count} रन</span>
+          </div>
+          <div class="profile-row">
+            <span class="label">महा आराधना (500 रन)</span>
+            <span class="value">${rep.cat500Count} रन</span>
           </div>
           <div class="profile-row">
             <span class="label">सक्रिय दिन / Active Days</span>
@@ -1248,14 +1326,14 @@ function printReportCard() {
         </div>
         
         <div class="footer">
-          चातुर्मास आराधना लीग 2026 - हनुमंत नगर चोरड़िया भवन
+          चातुर्मास आराधना लीग 2026
         </div>
       </div>
       <script>
         window.onload = function() {
           window.print();
         };
-      </scrip` + `t>
+      </script>
     </body>
     </html>
   `;
@@ -1314,12 +1392,12 @@ function copyWhatsAppReport() {
 // ==========================================
 
 const SPIRITUAL_TITLES = [
-  { min: 0, max: 100, titleHi: "श्रावक/श्राविका", titleEn: "Shravak/Shravika" },
-  { min: 100, max: 300, titleHi: "आराधक", titleEn: "Aradhak" },
-  { min: 300, max: 600, titleHi: "साधक", titleEn: "Sadhak" },
-  { min: 600, max: 1000, titleHi: "धर्म वीर", titleEn: "Dharma Veer" },
-  { min: 1000, max: 1500, titleHi: "तपस्वी", titleEn: "Tapasvi" },
-  { min: 1500, max: Infinity, titleHi: "परम आराधक", titleEn: "Param Aradhak" }
+  { min: 0, max: 500, titleHi: "श्रावक/श्राविका", titleEn: "Shravak/Shravika" },
+  { min: 500, max: 1500, titleHi: "आराधक", titleEn: "Aradhak" },
+  { min: 1500, max: 3500, titleHi: "साधक", titleEn: "Sadhak" },
+  { min: 3500, max: 7000, titleHi: "धर्म वीर", titleEn: "Dharma Veer" },
+  { min: 7000, max: 12000, titleHi: "तपस्वी", titleEn: "Tapasvi" },
+  { min: 12000, max: Infinity, titleHi: "परम आराधक", titleEn: "Param Aradhak" }
 ];
 
 function updateSpiritualTitle(score) {

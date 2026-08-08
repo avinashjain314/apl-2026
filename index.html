@@ -68,6 +68,10 @@
             <input type="text" id="reg-team" class="form-control" placeholder="अपनी टीम का नाम दर्ज करें" required>
           </div>
           <div class="form-group">
+            <label for="reg-city" id="t-cityLabel">शहर (City)</label>
+            <input type="text" id="reg-city" class="form-control" placeholder="अपने शहर का नाम दर्ज करें" required>
+          </div>
+          <div class="form-group">
             <label id="t-roleLabel">आपकी भूमिका</label>
             <div class="role-selector">
               <div class="role-option selected" data-role="Member" id="role-member">टीम सदस्य</div>
@@ -125,8 +129,8 @@
           <div id="title-progress-bar" style="background: linear-gradient(90deg, var(--color-saffron), var(--color-gold)); width: 0%; height: 100%; transition: width 0.5s ease-in-out;"></div>
         </div>
         <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--color-text-muted);">
-          <span id="title-progress-text">अगली पदवी के लिए 100 रनों की आवश्यकता है</span>
-          <span id="next-spiritual-title" style="font-weight: 600; color: var(--color-maroon);">आराधक (100)</span>
+          <span id="title-progress-text">अगली पदवी के लिए 500 रनों की आवश्यकता है</span>
+          <span id="next-spiritual-title" style="font-weight: 600; color: var(--color-maroon);">आराधक (500)</span>
         </div>
       </div>
       
@@ -163,58 +167,109 @@
       </p>
 
       <!-- Category: 1 Run Quick Single -->
-      <div class="category-section">
-        <div class="category-header-bar">
-          <div class="category-title-container">
-            <span class="category-badge-run">1 Run</span>
-            <span class="category-title" id="t-runs1">1 रन - क्विक सिंगल</span>
-          </div>
-        </div>
-        <div class="activities-list" id="run1-list">
-          <!-- Reactively generated activity items -->
-        </div>
-      </div>
+<div class="category-section">
+<div class="category-header-bar">
+<div class="category-title-container">
+<span class="category-badge-run">1 Run</span>
+<span class="category-title" id="t-runs1">1 रन - क्विक सिंगल</span>
+</div>
+</div>
+<div class="activities-list" id="run1-list">
+<!-- Reactively generated activity items -->
+</div>
+</div>
 
-      <!-- Category: 4 Runs Management Boundary -->
-      <div class="category-section">
-        <div class="category-header-bar">
-          <div class="category-title-container">
-            <span class="category-badge-run four">4 Runs</span>
-            <span class="category-title" id="t-runs4">4 रन - मैनेजमेंट बाउंड्री</span>
-          </div>
-        </div>
-        <div class="activities-list" id="run4-list">
-          <!-- Reactively generated activity items -->
-        </div>
-      </div>
+<!-- Category: 4 Runs Management Boundary -->
+<div class="category-section">
+<div class="category-header-bar">
+<div class="category-title-container">
+<span class="category-badge-run four">4 Runs</span>
+<span class="category-title" id="t-runs4">4 रन - मैनेजमेंट बाउंड्री</span>
+</div>
+</div>
+<div class="activities-list" id="run4-list">
+<!-- Reactively generated activity items -->
+</div>
+</div>
 
-      <!-- Category: 6 Runs It's A Sixer -->
-      <div class="category-section">
-        <div class="category-header-bar">
-          <div class="category-title-container">
-            <span class="category-badge-run six">6 Runs</span>
-            <span class="category-title" id="t-runs6">6 रन - इट्स अिक्सर</span>
-          </div>
-        </div>
-        <div class="activities-list" id="run6-list">
-          <!-- Reactively generated activity items -->
-        </div>
-      </div>
+<!-- Category: 6 Runs It's A Sixer -->
+<div class="category-section">
+<div class="category-header-bar">
+<div class="category-title-container">
+<span class="category-badge-run six">6 Runs</span>
+<span class="category-title" id="t-runs6">6 रन - इट्स अ सिक्सर</span>
+</div>
+</div>
+<div class="activities-list" id="run6-list">
+<!-- Reactively generated activity items -->
+</div>
+</div>
 
-      <!-- Category: One Time Special Scores -->
-      <div class="category-section">
-        <div class="category-header-bar">
-          <div class="category-title-container">
-            <span class="category-badge-run onetime">6 Runs</span>
-            <span class="category-title" id="t-runsOnetime">विशेष एक-बार स्कोर (6 रन)</span>
-          </div>
-        </div>
-        <div class="activities-list" id="onetime-list">
-          <!-- One-time scores populated -->
-        </div>
-      </div>
+<!-- Category: 20 Runs make a Twenty Fold -->
+<div class="category-section">
+<div class="category-header-bar">
+<div class="category-title-container">
+<span class="category-badge-run twenty" style="background-color: #ff9800; color: #fff;">20 Runs</span>
+<span class="category-title" id="t-runs20">20 रन - मेक अ ट्वेंटी फोल्ड</span>
+</div>
+</div>
+<div class="activities-list" id="run20-list">
+<!-- Reactively generated activity items -->
+</div>
+</div>
 
-      <!-- Cloud Synchronizer Status Footer -->
+<!-- Category: 50 Runs Half Century -->
+<div class="category-section">
+<div class="category-header-bar">
+<div class="category-title-container">
+<span class="category-badge-run fifty" style="background-color: #e91e63; color: #fff;">50 Runs</span>
+<span class="category-title" id="t-runs50">50 रन - हाफ सेंचुरी</span>
+</div>
+</div>
+<div class="activities-list" id="run50-list">
+<!-- Reactively generated activity items -->
+</div>
+</div>
+
+<!-- Category: 100 Runs it's a Century -->
+<div class="category-section">
+<div class="category-header-bar">
+<div class="category-title-container">
+<span class="category-badge-run century" style="background-color: #9c27b0; color: #fff;">100 Runs</span>
+<span class="category-title" id="t-runs100">100 रन - इट्स अ सेंचुरी</span>
+</div>
+</div>
+<div class="activities-list" id="run100-list">
+<!-- Reactively generated activity items -->
+</div>
+</div>
+
+<!-- Category: 200 Runs Double Century -->
+<div class="category-section">
+<div class="category-header-bar">
+<div class="category-title-container">
+<span class="category-badge-run double-century" style="background-color: #3f51b5; color: #fff;">200 Runs</span>
+<span class="category-title" id="t-runs200">200 रन - डबल सेंचुरी</span>
+</div>
+</div>
+<div class="activities-list" id="run200-list">
+<!-- Reactively generated activity items -->
+</div>
+</div>
+
+<!-- Category: 500 Runs Maha Aradhana -->
+<div class="category-section">
+<div class="category-header-bar">
+<div class="category-title-container">
+<span class="category-badge-run maha-aradhana" style="background-color: #009688; color: #fff;">500 Runs</span>
+<span class="category-title" id="t-runs500">500 रन - महा आराधना</span>
+</div>
+</div>
+<div class="activities-list" id="run500-list">
+<!-- Reactively generated activity items -->
+</div>
+</div>
+<!-- Cloud Synchronizer Status Footer -->
       <div class="sync-status-bar">
         <div class="sync-dot synced" id="sync-dot"></div>
         <span id="sync-text">क्लाउड से सुरक्षित जुड़ा है</span>
@@ -408,7 +463,7 @@
               <li>APL विजेताओं की घोषणा 27 सितम्बर 2026 को होने की संभावना है।</li>
               <li><b>गोले लगे बिंदु (Circled Items):</b> ①, ④, ⑤ (1 रन में) और ③ (4 रन में) तथा ②, ④, ⑤ (6 रन में) को यदि आप 1 से अधिक बार करते हैं, तो आपका स्कोर उतनी संख्या से गुणा किया जाएगा (जैसे: गुरु वंदन 3 बार किया तो 1 रन x 3 = 3 रन)।</li>
               <li><b>कैप्टन डबल स्कोर नियम:</b> टीम का कैप्टन जो भी आराधना करेगा उसका व्यक्तिगत दैनिक स्कोर <b>दोगुना (2x)</b> गिना जाएगा।</li>
-              <li>जहाँ भी "स्थानक" शब्द आया है, उसका अर्थ हनुमंत नगर चोरड़िया भवन समझना।</li>
+              <li>जहाँ भी "स्थानक" शब्द आया है, उसका अर्थ अपने निकटतम स्थानक से है।</li>
             </ol>
           </div>
         </div>
@@ -428,32 +483,32 @@
               <tbody>
                 <tr>
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);"><b>श्रावक / श्राविका</b></td>
-                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">0 - 99</td>
+                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">0 - 499</td>
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);">आराधना के पथ पर पहला कदम (Beginning of path)</td>
                 </tr>
                 <tr style="background-color: rgba(0,0,0,0.02);">
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);"><b>आराधक</b></td>
-                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">100 - 299</td>
+                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">500 - 1499</td>
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);">नियमित रूप से आराधना करने वाले (Regular practitioner)</td>
                 </tr>
                 <tr>
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);"><b>साधक</b></td>
-                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">300 - 599</td>
+                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">1500 - 3499</td>
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);">समर्पित आराधना की ओर अग्रसर (Dedicated seeker)</td>
                 </tr>
                 <tr style="background-color: rgba(0,0,0,0.02);">
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);"><b>धर्म वीर</b></td>
-                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">600 - 999</td>
+                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">3500 - 6999</td>
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);">धर्म पर अडिग रहने वाले (Champion of dharma)</td>
                 </tr>
                 <tr>
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);"><b>तपस्वी</b></td>
-                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">1000 - 1499</td>
+                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">7000 - 11999</td>
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);">तप और उपवास करने वाले (Dedicated penance)</td>
                 </tr>
                 <tr style="background-color: rgba(0,0,0,0.02);">
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);"><b>परम आराधक</b></td>
-                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">1500+</td>
+                  <td style="padding: 10px 8px; border: 1px solid var(--color-border);">12000+</td>
                   <td style="padding: 10px 8px; border: 1px solid var(--color-border);">सर्वोच्च कोटि के आराधक (Highest devotee / Spiritual peak)</td>
                 </tr>
               </tbody>

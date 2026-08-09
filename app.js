@@ -1161,6 +1161,11 @@ function getWhatsAppText() {
   if (state.user.role === "Captain") {
     text += "\n*(कैप्टन बोनस 2x स्कोर शामिल है)*\n";
   }
+  
+  // Append detailed text-based log for WhatsApp
+  text += "\n*📋 विस्तृत आराधना विवरण (Detailed Log):*\n";
+  text += generateTextDetailsLog(state.currentLanguage === "hi");
+  
   text += "=========================\n";
   text += "_आस्था, संयम और तप का सुंदर चातुर्मास पथ।_";
   return text;

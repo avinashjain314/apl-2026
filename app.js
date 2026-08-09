@@ -41,7 +41,7 @@ const ACTIVITIES = [
   // === 6 RUNS IT'S A SIXER ===
   { id: "run6_item1", category: "run6", index: 1, score: 6, circled: false, textHi: "पूरा दिन Angry / गुस्सा नहीं करने पर", textEn: "Not getting angry for the entire day" },
   { id: "run6_item2", category: "run6", index: 2, score: 6, circled: true, textHi: "1 सामायिक करने पर [घर में भी मान्य]*", textEn: "Doing 1 Samayik [valid at home too]*" },
-  { id: "run6_item3", category: "run6", index: 3, score: 6, circled: false, textHi: "णमो नाणस्स की 1 माला फेरने पर", textEn: "Chanting 1 mala of 'Namo Nanam'" },
+  { id: "run6_item3", category: "run6", index: 3, score: 6, circled: true, textHi: "णमो नाणस्स की 1 माला फेरने पर", textEn: "Chanting 1 mala of 'Namo Nanam'" },
   { id: "run6_item4", category: "run6", index: 4, score: 6, circled: true, textHi: "2 लोगस्स करने पर (तीर्थंकर भगवान की स्तुति है)*", textEn: "Chanting 2 Logassa [Tirthankar Stuti]*" },
   { id: "run6_item5", category: "run6", index: 5, score: 6, circled: true, textHi: "2 णमोत्थुणं करने पर (तीर्थंकर भगवंतों के गुणाणुवाद)", textEn: "Chanting 2 Namutthunam (Tirthankar praises)" },
   { id: "run6_item6", category: "run6", index: 6, score: 6, circled: false, textHi: "एकासन करने पर*", textEn: "Doing Ekasan (eating once a day in one sitting)*" },

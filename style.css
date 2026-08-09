@@ -967,3 +967,81 @@ body {
     font-size: 12.5px;
   }
 }
+
+
+/* Leaderboard Cards styling */
+.leaderboard-banner-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: -12px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.leaderboard-card {
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 10px 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 72px; /* Fixed height for clean grid alignment */
+  box-sizing: border-box;
+}
+
+.leaderboard-card-title {
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.leaderboard-card-icon {
+  font-size: 12px;
+}
+
+.leaderboard-card-names {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-maroon);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+.leaderboard-card-score {
+  font-size: 11px;
+  color: var(--color-text-dark);
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+/* Horizontal Scrolling Marquee for tied leaders */
+.leaderboard-marquee-wrapper {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.leaderboard-marquee-content {
+  display: inline-block;
+  animation: leaderboard-marquee-scroll 10s linear infinite;
+  padding-left: 10%;
+}
+
+@keyframes leaderboard-marquee-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}

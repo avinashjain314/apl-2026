@@ -356,6 +356,7 @@ async function syncProgress() {
     if (result && result.status === "success") {
       setSyncStatus("synced");
       state.isDirty = false;
+      fetchLeaderboard(state.currentDate);
     } else {
       throw new Error(result.message || "Failed saving on sheet");
     }
@@ -883,6 +884,7 @@ function showScreen(screenId) {
   
   if (screenId === "dashboard") {
     updateLanguageUI();
+    fetchLeaderboard(state.currentDate);
   }
 }
 
@@ -1342,6 +1344,91 @@ function printReportCard() {
   
   printWindow.document.write(html);
   printWindow.document.close();
+}
+
+let currentLeaderboardCache = null;
+
+async function fetchLeaderboard(date) {
+  if (!state.user || !CONFIG.apiEndpoint) return;
+  
+  const dailyNamesEl = document.getElementById("daily-leader-display");
+  const overallNamesEl = document.getElementById("overall-leader-display");
+  const dailyRunsEl = document.getElementById("daily-leader-runs");
+  const overallRunsEl = document.getElementById("overall-leader-runs");
+  
+  if (dailyNamesEl && (dailyNamesEl.innerText === "लोड हो रहा है..." || dailyNamesEl.innerText === "Loading...")) {
+    dailyNamesEl.innerText = state.currentLanguage === "hi" ? "लोड हो रहा है..." : "Loading...";
+  }
+  if (overallNamesEl && (overallNamesEl.innerText === "लोड हो रहा है..." || overallNamesEl.innerText === "Loading...")) {
+    overallNamesEl.innerText = state.currentLanguage === "hi" ? "लोड हो रहा है..." : "Loading...";
+  }
+  
+  try {
+    const url = `${CONFIG.apiEndpoint}?action=getLeaderboard&date=${date}`;
+    const response = await fetch(url);
+    const result = await response.json();
+    
+    if (result && result.status === "success") {
+      currentLeaderboardCache = result;
+      renderLeaderboardUI(result);
+    }
+  } catch (err) {
+    console.error("Failed to fetch leaderboard:", err);
+  }
+}
+
+function renderLeaderboardUI(data) {
+  const dailyNamesEl = document.getElementById("daily-leader-display");
+  const overallNamesEl = document.getElementById("overall-leader-display");
+  const dailyRunsEl = document.getElementById("daily-leader-runs");
+  const overallRunsEl = document.getElementById("overall-leader-runs");
+  
+  if (!dailyNamesEl || !overallNamesEl) return;
+  
+  const isHi = state.currentLanguage === "hi";
+  
+  // 1. Render Daily Leader Card
+  if (data.dailyTop && data.dailyTop.length > 0) {
+    const namesText = formatLeaderNames(data.dailyTop);
+    
+    // Apply marquee scrolling if name text is too long (above 18 chars)
+    if (namesText.length > 18) {
+      dailyNamesEl.innerHTML = `<div class="leaderboard-marquee-wrapper"><span class="leaderboard-marquee-content">${namesText}</span></div>`;
+    } else {
+      dailyNamesEl.innerText = namesText;
+    }
+    dailyRunsEl.innerText = `${data.dailyMax} ${isHi ? "रन" : "Runs"}`;
+  } else {
+    dailyNamesEl.innerText = isHi ? "कोई आराधना नहीं" : "No Aradhana Yet";
+    dailyRunsEl.innerText = `-`;
+  }
+  
+  // 2. Render Overall Leader Card
+  if (data.overallTop && data.overallTop.length > 0) {
+    const namesText = formatLeaderNames(data.overallTop);
+    
+    if (namesText.length > 18) {
+      overallNamesEl.innerHTML = `<div class="leaderboard-marquee-wrapper"><span class="leaderboard-marquee-content">${namesText}</span></div>`;
+    } else {
+      overallNamesEl.innerText = namesText;
+    }
+    overallRunsEl.innerText = `${data.overallMax} ${isHi ? "रन" : "Runs"}`;
+  } else {
+    overallNamesEl.innerText = "-";
+    overallRunsEl.innerText = `-`;
+  }
+}
+
+function formatLeaderNames(leaders) {
+  if (!leaders || leaders.length === 0) return "-";
+  
+  const isHi = state.currentLanguage === "hi";
+  const formatted = leaders.map(u => {
+    const teamText = u.team ? ` (${isHi ? "टीम: " : "Team: "}${u.team})` : "";
+    return `${u.name}${teamText}`;
+  });
+  
+  return formatted.join(", ");
 }
 
 function openReportModal() {

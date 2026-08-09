@@ -872,6 +872,36 @@ function handleLogout() {
   showScreen("login");
 }
 
+async function pullLatestData() {
+  if (!state.user || !CONFIG.apiEndpoint) return;
+  
+  setSyncStatus("syncing");
+  try {
+    const url = `${CONFIG.apiEndpoint}?action=checkUser&mobile=${state.user.mobile}`;
+    const response = await fetch(url);
+    const result = await response.json();
+    
+    if (result && result.status === "success" && result.exists) {
+      // Sync local state with database to prevent caching out-of-sync data
+      state.user = result.user;
+      state.trackerData = JSON.parse(result.trackerData || "{}");
+      state.isDirty = false;
+      saveToLocalStorage();
+      setSyncStatus("synced");
+    }
+  } catch (error) {
+    console.error("Failed to pull latest data on startup:", error);
+    setSyncStatus("error");
+  } finally {
+    // Always render UI with whatever is available (offline fallback)
+    showScreen("dashboard");
+    renderCalendar();
+    renderActivities();
+    updateScoreUI();
+    updateLanguageUI();
+  }
+}
+
 function showScreen(screenId) {
   document.getElementById("screen-login").style.display = screenId === "login" ? "block" : "none";
   document.getElementById("screen-registration").style.display = screenId === "registration" ? "block" : "none";
@@ -975,12 +1005,7 @@ window.addEventListener("load", () => {
   
   // Check auth status
   if (state.user) {
-    showScreen("dashboard");
-    renderCalendar();
-    renderActivities();
-    updateScoreUI();
-    updateLanguageUI();
-    syncProgress(); // trigger background sync on startup
+    pullLatestData();
   } else {
     showScreen("login");
     updateLanguageUI();

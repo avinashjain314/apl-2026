@@ -1141,6 +1141,75 @@ function getWhatsAppText() {
   return text;
 }
 
+function generatePrintDetailsHtml() {
+  let detailRowsHtml = "";
+  const sortedKeys = Object.keys(state.trackerData).sort();
+  
+  const isHi = state.currentLanguage === "hi";
+  const isCaptain = (state.user && state.user.role === "Captain");
+  
+  // Put 'onetime' at the end of logs for clean layout
+  const sortedDates = sortedKeys.filter(k => k !== "onetime");
+  if (sortedKeys.includes("onetime")) {
+    sortedDates.push("onetime");
+  }
+  
+  sortedDates.forEach(dateKey => {
+    const dayData = state.trackerData[dateKey] || {};
+    let dateLabel = dateKey;
+    
+    if (dateKey === "onetime") {
+      dateLabel = isHi ? "विशेष एक-बार" : "Special One-Time";
+    } else {
+      try {
+        const parts = dateKey.split("-");
+        if (parts.length === 3) {
+          const monthNames = isHi 
+            ? ["जनवरी", "फ़रवरी", "मार्च", "अप्रैल", "मई", "जून", "जुलाई", "अगस्त", "सितम्बर", "अक्टूबर", "नवम्बर", "दिसम्बर"]
+            : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+          const mIdx = parseInt(parts[1], 10) - 1;
+          dateLabel = `${parts[2]}-${monthNames[mIdx]}`;
+        }
+      } catch (err) {}
+    }
+    
+    // Scan all activities in score order
+    ACTIVITIES.forEach(act => {
+      const isOneTimeSection = (dateKey === "onetime");
+      if (act.isOneTime !== isOneTimeSection) return;
+      
+      const val = Number(dayData[act.id]) || 0;
+      if (val <= 0) return;
+      
+      const actName = isHi ? act.textHi : act.textEn;
+      let points = val * act.score;
+      if (isCaptain) {
+        points *= 2;
+      }
+      
+      detailRowsHtml += `
+        <tr>
+          <td style="white-space: nowrap;">${dateLabel}</td>
+          <td>${actName}</td>
+          <td style="text-align: center;">${val}</td>
+          <td style="text-align: right; font-weight: bold; white-space: nowrap;">${points} ${isHi ? "रन" : "Runs"}</td>
+        </tr>
+      `;
+    });
+  });
+  
+  if (!detailRowsHtml) {
+    detailRowsHtml = `
+      <tr>
+        <td colspan="4" style="text-align: center; color: #777; padding: 12px;">
+          ${isHi ? "कोई आराधना दर्ज नहीं की गई है" : "No aradhana has been logged yet"}
+        </td>
+      </tr>
+    `;
+  }
+  return detailRowsHtml;
+}
+
 function printReportCard() {
   const rep = generateReportData();
   const roleText = state.user.role === "Captain" 

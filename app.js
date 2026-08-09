@@ -1341,9 +1341,46 @@ function printReportCard() {
           color: #777;
           font-style: italic;
         }
+        .detail-section {
+          margin-top: 35px;
+          page-break-before: auto;
+        }
+        .detail-title {
+          font-weight: bold;
+          color: #800000;
+          border-bottom: 2px solid #800000;
+          padding-bottom: 6px;
+          margin-bottom: 12px;
+          font-size: 14px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        .detail-table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 10px;
+          font-size: 11px;
+        }
+        .detail-table th {
+          background-color: #800000;
+          color: #fff;
+          padding: 6px 8px;
+          text-align: left;
+          border: 1px solid #ddd;
+          font-weight: bold;
+        }
+        .detail-table td {
+          padding: 6px 8px;
+          border: 1px solid #ddd;
+          text-align: left;
+          line-height: 1.3;
+        }
+        .detail-table tr:nth-child(even) {
+          background-color: #fcf8f2;
+        }
         @media print {
           body { background: none; padding: 0; }
-          .card { box-shadow: none; border-radius: 0; border: 4px double #800000; }
+          .card { box-shadow: none; border-radius: 0; border: 4px double #800000; max-width: 100%; width: 100%; }
         }
       </style>
     </head>
@@ -1426,6 +1463,24 @@ function printReportCard() {
             <span class="label">सक्रिय दिन / Active Days</span>
             <span class="value">${rep.activeDays} / ${rep.totalPossibleDays}</span>
           </div>
+        </div>
+        
+        <!-- Detailed Date-Wise Activity Log -->
+        <div class="detail-section">
+          <div class="detail-title">विस्तृत विवरण / Detailed Activity Log</div>
+          <table class="detail-table">
+            <thead>
+              <tr>
+                <th>दिनांक / Date</th>
+                <th>आराधना / Activity</th>
+                <th style="text-align: center;">संख्या / Qty</th>
+                <th style="text-align: right;">रन / Runs</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${generatePrintDetailsHtml()}
+            </tbody>
+          </table>
         </div>
         
         <div class="footer">

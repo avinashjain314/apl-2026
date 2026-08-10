@@ -707,18 +707,23 @@ async function handleLogin(e) {
     const result = await fetchRequest(checkUrl);
     
     if (result && result.status === "success") {
-      if (result.userExists) {
+      const exists = result.userExists !== undefined ? result.userExists : result.exists;
+      const userData = result.userData || result.user;
+      
+      if (exists) {
         // User exists, log them in and load their progress
         state.user = {
-          mobile: result.userData.mobile,
-          name: result.userData.name,
-          teamName: result.userData.teamName,
-          role: result.userData.role,
-          city: result.userData.city || "",
-          age: result.userData.age,
-          fatherHusbandName: result.userData.fatherHusbandName
+          mobile: userData.mobile,
+          name: userData.name,
+          teamName: userData.teamName,
+          role: userData.role,
+          city: userData.city || "",
+          age: userData.age,
+          fatherHusbandName: userData.fatherHusbandName
         };
-        state.trackerData = JSON.parse(result.userData.trackerData || "{}");
+        
+        const rawTracker = userData.trackerData || result.trackerData || "{}";
+        state.trackerData = typeof rawTracker === "string" ? JSON.parse(rawTracker) : rawTracker;
         state.isDirty = false;
         
         saveToLocalStorage();
@@ -1206,7 +1211,7 @@ function generatePrintDetailsHtml() {
     // Scan all activities in score order
     ACTIVITIES.forEach(act => {
       const isOneTimeSection = (dateKey === "onetime");
-      if (act.isOneTime !== isOneTimeSection) return;
+      if (Boolean(act.isOneTime) !== isOneTimeSection) return;
       
       const val = Number(dayData[act.id]) || 0;
       if (val <= 0) return;
@@ -1379,8 +1384,8 @@ function printReportCard() {
           background-color: #fcf8f2;
         }
         @media print {
-          body { background: none; padding: 0; }
-          .card { box-shadow: none; border-radius: 0; border: 4px double #800000; max-width: 100%; width: 100%; }
+          body { background: none; padding: 10px; margin: 0; }
+          .card { box-shadow: none; border-radius: 0; border: 4px double #800000; max-width: 100%; width: 100%; padding: 20px; box-sizing: border-box; }
         }
       </style>
     </head>

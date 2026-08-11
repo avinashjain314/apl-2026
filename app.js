@@ -1007,6 +1007,32 @@ window.addEventListener("load", () => {
   if (btnPrintCard) {
     btnPrintCard.onclick = printReportCard;
   }
+
+  // Leaderboard sub-tabs toggling handler
+  document.querySelectorAll(".sub-tab-btn").forEach(btn => {
+    btn.onclick = function() {
+      const parent = this.parentElement;
+      parent.querySelectorAll(".sub-tab-btn").forEach(b => {
+        b.classList.remove("active");
+        b.style.background = "white";
+        b.style.color = "var(--color-saffron)";
+      });
+      this.classList.add("active");
+      this.style.background = "var(--color-saffron)";
+      this.style.color = "white";
+      
+      const container = parent.parentElement;
+      container.querySelectorAll(".sub-tab-content").forEach(c => {
+        c.style.display = "none";
+      });
+      
+      const targetId = "sub-tab-" + this.getAttribute("data-subtab");
+      const targetContent = document.getElementById(targetId);
+      if (targetContent) {
+        targetContent.style.display = "block";
+      }
+    };
+  });
   
   // Check auth status
   if (state.user) {
@@ -1687,4 +1713,63 @@ function updateSpiritualTitle(score) {
       ? "बधाई हो! आप उच्चतम आध्यात्मिक पदवी पर हैं।" 
       : "Congratulations! You have reached the highest title.";
   }
+}
+
+
+function renderTeamLeaderboard(teams) {
+  const tbody = document.getElementById("team-leaderboard-body");
+  if (!tbody) return;
+  
+  if (!teams || teams.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="3" style="text-align: center; padding: 12px; color: #777;">रैंकिंग उपलब्ध नहीं है / No rankings available</td></tr>`;
+    return;
+  }
+  
+  let html = "";
+  teams.forEach((t, index) => {
+    let rankBadge = `${index + 1}`;
+    if (index === 0) rankBadge = "🏆";
+    else if (index === 1) rankBadge = "🥈";
+    else if (index === 2) rankBadge = "🥉";
+    
+    html += `
+      <tr style="border-bottom: 1px solid var(--color-border); height: 38px;">
+        <td style="padding: 6px 4px; font-weight: bold; text-align: center;">${rankBadge}</td>
+        <td style="padding: 6px 4px; font-weight: 600; color: var(--color-maroon);">${t.name}</td>
+        <td style="padding: 6px 4px; text-align: right; font-weight: bold; color: var(--color-gold);">${t.score}</td>
+      </tr>
+    `;
+  });
+  tbody.innerHTML = html;
+}
+
+function renderKidsLeaderboard(kids) {
+  const tbody = document.getElementById("kids-leaderboard-body");
+  if (!tbody) return;
+  
+  if (!kids || kids.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 12px; color: #777;">रैंकिंग उपलब्ध नहीं है / No rankings available</td></tr>`;
+    return;
+  }
+  
+  let html = "";
+  kids.forEach((k, index) => {
+    let rankBadge = `${index + 1}`;
+    if (index === 0) rankBadge = "🏆";
+    else if (index === 1) rankBadge = "🥈";
+    else if (index === 2) rankBadge = "🥉";
+    
+    html += `
+      <tr style="border-bottom: 1px solid var(--color-border); height: 38px;">
+        <td style="padding: 6px 4px; font-weight: bold; text-align: center;">${rankBadge}</td>
+        <td style="padding: 6px 4px;">
+          <span style="font-weight: 600; color: var(--color-text-dark);">${k.name}</span>
+          <span style="font-size: 11px; color: var(--color-text-muted);"> (${k.age} साल)</span>
+        </td>
+        <td style="padding: 6px 4px; color: var(--color-text-muted); font-size: 12px;">${k.team}</td>
+        <td style="padding: 6px 4px; text-align: right; font-weight: bold; color: var(--color-gold);">${k.score}</td>
+      </tr>
+    `;
+  });
+  tbody.innerHTML = html;
 }

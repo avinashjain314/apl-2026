@@ -1533,19 +1533,60 @@ function printReportCard() {
 
 let currentLeaderboardCache = null;
 
-async function fetchLeaderboard(date) {
-  if (!state.user || !CONFIG.apiEndpoint) return;
+function renderLeaderboardUI(result) {
+  const isHi = state.currentLanguage === "hi";
+  
+  if (result.teamLeaderboard) renderTeamLeaderboard(result.teamLeaderboard);
+  if (result.kidsLeaderboard) renderKidsLeaderboard(result.kidsLeaderboard);
   
   const dailyNamesEl = document.getElementById("daily-leader-display");
   const overallNamesEl = document.getElementById("overall-leader-display");
   const dailyRunsEl = document.getElementById("daily-leader-runs");
   const overallRunsEl = document.getElementById("overall-leader-runs");
   
-  if (dailyNamesEl && (dailyNamesEl.innerText === "लोड हो रहा है..." || dailyNamesEl.innerText === "Loading...")) {
-    dailyNamesEl.innerText = state.currentLanguage === "hi" ? "लोड हो रहा है..." : "Loading...";
+  if (dailyNamesEl && dailyRunsEl) {
+    if (result.dailyTop && result.dailyTop.length > 0) {
+      const namesText = formatLeaderNames(result.dailyTop);
+      if (namesText.length > 18) {
+        dailyNamesEl.innerHTML = `<div class="leaderboard-marquee-wrapper"><span class="leaderboard-marquee-content">${namesText}</span></div>`;
+      } else {
+        dailyNamesEl.innerText = namesText;
+      }
+      dailyRunsEl.innerText = `${result.dailyMax} ${isHi ? "रन" : "Runs"}`;
+    } else {
+      dailyNamesEl.innerText = isHi ? "कोई आराधना नहीं" : "No Aradhana Yet";
+      dailyRunsEl.innerText = `-`;
+    }
   }
-  if (overallNamesEl && (overallNamesEl.innerText === "लोड हो रहा है..." || overallNamesEl.innerText === "Loading...")) {
-    overallNamesEl.innerText = state.currentLanguage === "hi" ? "लोड हो रहा है..." : "Loading...";
+  
+  if (overallNamesEl && overallRunsEl) {
+    if (result.overallTop && result.overallTop.length > 0) {
+      const namesText = formatLeaderNames(result.overallTop);
+      if (namesText.length > 18) {
+        overallNamesEl.innerHTML = `<div class="leaderboard-marquee-wrapper"><span class="leaderboard-marquee-content">${namesText}</span></div>`;
+      } else {
+        overallNamesEl.innerText = namesText;
+      }
+      overallRunsEl.innerText = `${result.overallMax} ${isHi ? "रन" : "Runs"}`;
+    } else {
+      overallNamesEl.innerText = "-";
+      overallRunsEl.innerText = `-`;
+    }
+  }
+}
+
+async function fetchLeaderboard(date) {
+  if (!CONFIG.apiEndpoint) return;
+  
+  const cacheKey = "apl_leaderboard_" + date;
+  const cachedData = localStorage.getItem(cacheKey);
+  if (cachedData) {
+    try {
+      const parsed = JSON.parse(cachedData);
+      renderLeaderboardUI(parsed);
+    } catch (e) {
+      console.error("Error reading cached leaderboard:", e);
+    }
   }
   
   try {
@@ -1554,53 +1595,11 @@ async function fetchLeaderboard(date) {
     const result = await response.json();
     
     if (result && result.status === "success") {
-      currentLeaderboardCache = result;
+      localStorage.setItem(cacheKey, JSON.stringify(result));
       renderLeaderboardUI(result);
     }
-  } catch (err) {
-    console.error("Failed to fetch leaderboard:", err);
-  }
-}
-
-function renderLeaderboardUI(data) {
-  const dailyNamesEl = document.getElementById("daily-leader-display");
-  const overallNamesEl = document.getElementById("overall-leader-display");
-  const dailyRunsEl = document.getElementById("daily-leader-runs");
-  const overallRunsEl = document.getElementById("overall-leader-runs");
-  
-  if (!dailyNamesEl || !overallNamesEl) return;
-  
-  const isHi = state.currentLanguage === "hi";
-  
-  // 1. Render Daily Leader Card
-  if (data.dailyTop && data.dailyTop.length > 0) {
-    const namesText = formatLeaderNames(data.dailyTop);
-    
-    // Apply marquee scrolling if name text is too long (above 18 chars)
-    if (namesText.length > 18) {
-      dailyNamesEl.innerHTML = `<div class="leaderboard-marquee-wrapper"><span class="leaderboard-marquee-content">${namesText}</span></div>`;
-    } else {
-      dailyNamesEl.innerText = namesText;
-    }
-    dailyRunsEl.innerText = `${data.dailyMax} ${isHi ? "रन" : "Runs"}`;
-  } else {
-    dailyNamesEl.innerText = isHi ? "कोई आराधना नहीं" : "No Aradhana Yet";
-    dailyRunsEl.innerText = `-`;
-  }
-  
-  // 2. Render Overall Leader Card
-  if (data.overallTop && data.overallTop.length > 0) {
-    const namesText = formatLeaderNames(data.overallTop);
-    
-    if (namesText.length > 18) {
-      overallNamesEl.innerHTML = `<div class="leaderboard-marquee-wrapper"><span class="leaderboard-marquee-content">${namesText}</span></div>`;
-    } else {
-      overallNamesEl.innerText = namesText;
-    }
-    overallRunsEl.innerText = `${data.overallMax} ${isHi ? "रन" : "Runs"}`;
-  } else {
-    overallNamesEl.innerText = "-";
-    overallRunsEl.innerText = `-`;
+  } catch (error) {
+    console.error("Leaderboard fetch error:", error);
   }
 }
 

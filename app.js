@@ -286,10 +286,21 @@ function saveToLocalStorage() {
   }
 }
 
+function getTodayDateStr() {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  const todayStr = `${yyyy}-${mm}-${dd}`;
+  if (todayStr < CONFIG.startDate) return CONFIG.startDate;
+  if (todayStr > CONFIG.endDate) return CONFIG.endDate;
+  return todayStr;
+}
+
 function loadFromLocalStorage() {
   try {
     state.currentLanguage = localStorage.getItem("apl_lang") || "hi";
-    state.currentDate = localStorage.getItem("apl_date") || "2026-08-09";
+    state.currentDate = getTodayDateStr();
     
     const userStr = localStorage.getItem("apl_user");
     if (userStr && userStr !== "undefined" && userStr !== "null") {
@@ -475,6 +486,9 @@ function renderCalendar() {
     
     if (d.dateStr === state.currentDate) {
       card.classList.add("active");
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }, 150);
     }
     
     const numEl = document.createElement("span");
